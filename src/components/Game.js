@@ -1,39 +1,71 @@
-import { useEffect } from 'react';
-import './App.css';
+import { useEffect, useState } from 'react';
 
-function App() {
+import Board from './Board';
 
+const Game = () => {
+
+    const [game, setGame] = useState(
+        {
+            word:""
+        },
+    )
+
+
+     const findWord = (length) => {
+        fetch(`https://random-word-api.herokuapp.com/word?`, {
+            mode: "cors",
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (response) {
+                console.log(response)
+                if (response[0].length !== length && response[0].length !== length +1 && response[0].length !== length -1) {
+                    findWord(length);
+                } else {
+                    setGame({word: response[0]})
+                    console.log(response[0]);
+                }
+            });
+      }
+
+
+
+
+
+
+
+
+
+
+
+    useEffect(() => {
+        findWord(5)
+
+    }, [game.length]);
 
   return (
     <div className="App">
 
         <p>
           Ready to go
+         
         </p>
-
+        <Board />
 
     </div>
   );
 }
 
 
+
+
+
+
+
+
+
 //Calls random words until it receives one of the appropriate length
-function findWord(length) {
-  fetch(`https://random-word-api.herokuapp.com/word?`, {
-      mode: "cors",
-  })
-      .then(function (response) {
-          return response.json();
-      })
-      .then(function (response) {
-          console.log(response);
-          if (response[0].length != length) {
-              findWord(length);
-          } else {
-              console.log(response);
-          }
-      });
-}
 
 
 //Checks if word IS word, updates isWord
@@ -72,4 +104,4 @@ async function checkWordle(word) {
   return response;
 }
 
-export default App;
+export default Game;
