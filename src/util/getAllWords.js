@@ -15,7 +15,7 @@ const getWords = () => {
 
             console.log("complete");
             fs.writeFile(
-                "allWords.json",
+                "lists/allWords.json",
                 JSON.stringify(allWords),
                 (err) => {
                     if (err) throw err;

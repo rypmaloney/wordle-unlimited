@@ -21,3 +21,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+# word lists - they are very large
+allWords.json
+fiveLetterWords.json
+sevenLetterWords.json
+sixLetterWords.json

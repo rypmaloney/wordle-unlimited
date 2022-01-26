@@ -10,37 +10,7 @@ const Game = () => {
         },
     )
 
-
-     const findWord = (length) => {
-        fetch(`https://random-word-api.herokuapp.com/word?`, {
-            mode: "cors",
-        })
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (response) {
-                console.log(response)
-                if (response[0].length !== length && response[0].length !== length +1 && response[0].length !== length -1) {
-                    findWord(length);
-                } else {
-                    setGame({word: response[0]})
-                    console.log(response[0]);
-                }
-            });
-      }
-
-
-
-
-
-
-
-
-
-
-
     useEffect(() => {
-        findWord(5)
 
     }, [game.length]);
 
