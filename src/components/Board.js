@@ -15,6 +15,9 @@ function Board(props) {
 
     } = props;
 
+
+
+    
     return (
         <div>
             <div className="px-16">
@@ -28,7 +31,7 @@ function Board(props) {
                     );
                 })}
 
-                <Keyboard />
+                <Keyboard letters={letters}/>
 
                 <p className="text-sm text-slate-500 pt-10 min-h-14">
                     {warning}

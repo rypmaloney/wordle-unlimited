@@ -28,7 +28,13 @@ const Game = () => {
             guess: "",
             guessSplit: ["", "", "", "", ""],
             letterCheck: ["", "", "", "", ""],
-            letterColor:["bg-slate-100", "bg-slate-100", "bg-slate-100", "bg-slate-100", "bg-slate-100"]
+            letterColor: [
+                "bg-slate-100",
+                "bg-slate-100",
+                "bg-slate-100",
+                "bg-slate-100",
+                "bg-slate-100",
+            ],
         },
         {
             guessMade: false,
@@ -36,7 +42,13 @@ const Game = () => {
             guess: "",
             guessSplit: ["", "", "", "", ""],
             letterCheck: ["", "", "", "", ""],
-            letterColor:["bg-slate-100", "bg-slate-100", "bg-slate-100", "bg-slate-100", "bg-slate-100"]
+            letterColor: [
+                "bg-slate-100",
+                "bg-slate-100",
+                "bg-slate-100",
+                "bg-slate-100",
+                "bg-slate-100",
+            ],
         },
         {
             guessMade: false,
@@ -44,7 +56,13 @@ const Game = () => {
             guess: "",
             guessSplit: ["", "", "", "", ""],
             letterCheck: ["", "", "", "", ""],
-            letterColor:["bg-slate-100", "bg-slate-100", "bg-slate-100", "bg-slate-100", "bg-slate-100"]
+            letterColor: [
+                "bg-slate-100",
+                "bg-slate-100",
+                "bg-slate-100",
+                "bg-slate-100",
+                "bg-slate-100",
+            ],
         },
         {
             guessMade: false,
@@ -52,7 +70,13 @@ const Game = () => {
             guess: "",
             guessSplit: ["", "", "", "", ""],
             letterCheck: ["", "", "", "", ""],
-            letterColor:["bg-slate-100", "bg-slate-100", "bg-slate-100", "bg-slate-100", "bg-slate-100"]
+            letterColor: [
+                "bg-slate-100",
+                "bg-slate-100",
+                "bg-slate-100",
+                "bg-slate-100",
+                "bg-slate-100",
+            ],
         },
         {
             guessMade: false,
@@ -60,122 +84,123 @@ const Game = () => {
             guess: "",
             guessSplit: ["", "", "", "", ""],
             letterCheck: ["", "", "", "", ""],
-            letterColor:["bg-slate-100", "bg-slate-100", "bg-slate-100", "bg-slate-100", "bg-slate-100"]
+            letterColor: [
+                "bg-slate-100",
+                "bg-slate-100",
+                "bg-slate-100",
+                "bg-slate-100",
+                "bg-slate-100",
+            ],
         },
     ]);
-    const [letters, setLetters] = useState(
-        [
-            {
-                letter: "Q",
-                color: "bg-slate-100",
-            },
-            {
-                letter: "W",
-                color: "bg-slate-100",
-            },
-            {
-                letter: "E",
-                color: "bg-slate-100",
-            },
-            {
-                letter: "R",
-                color: "bg-slate-100",
-            },
-            {
-                letter: "T",
-                color: "bg-slate-100",
-            },
-            {
-                letter: "Y",
-                color: "bg-slate-100",
-            },
-            {
-                letter: "U",
-                color: "bg-slate-100",
-            },
-            {
-                letter: "I",
-                color: "bg-slate-100",
-            },
-            {
-                letter: "O",
-                color: "bg-slate-100",
-            },
-            {
-                letter: "P",
-                color: "bg-slate-100",
-            },
-        ],
-        [
-            {
-                letter: "A",
-                color: "bg-slate-100",
-            },
-            {
-                letter: "S",
-                color: "bg-slate-100",
-            },
-            {
-                letter: "D",
-                color: "bg-slate-100",
-            },
-            {
-                letter: "F",
-                color: "bg-slate-100",
-            },
-            {
-                letter: "G",
-                color: "bg-slate-100",
-            },
-            {
-                letter: "H",
-                color: "bg-slate-100",
-            },
-            {
-                letter: "J",
-                color: "bg-slate-100",
-            },
-            {
-                letter: "K",
-                color: "bg-slate-100",
-            },
-            {
-                letter: "L",
-                color: "bg-slate-100",
-            },
+    const [letters, setLetters] = useState([
+        {
+            letter: "Q",
+            color: "bg-slate-100",
+        },
+        {
+            letter: "W",
+            color: "bg-slate-100",
+        },
+        {
+            letter: "E",
+            color: "bg-slate-100",
+        },
+        {
+            letter: "R",
+            color: "bg-slate-100",
+        },
+        {
+            letter: "T",
+            color: "bg-slate-100",
+        },
+        {
+            letter: "Y",
+            color: "bg-slate-100",
+        },
+        {
+            letter: "U",
+            color: "bg-slate-100",
+        },
+        {
+            letter: "I",
+            color: "bg-slate-100",
+        },
+        {
+            letter: "O",
+            color: "bg-slate-100",
+        },
+        {
+            letter: "P",
+            color: "bg-slate-100",
+        },
 
-        ],
-        [
-            {
-                letter: "Z",
-                color: "bg-slate-100",
-            },
-            {
-                letter: "X",
-                color: "bg-slate-100",
-            },
-            {
-                letter: "C",
-                color: "bg-slate-100",
-            },
-            {
-                letter: "V",
-                color: "bg-slate-100",
-            },
-            {
-                letter: "B",
-                color: "bg-slate-100",
-            },
-            {
-                letter: "N",
-                color: "bg-slate-100",
-            },
-            {
-                letter: "M",
-                color: "bg-slate-100",
-            },
-        ]
-    );
+        {
+            letter: "A",
+            color: "bg-slate-100",
+        },
+        {
+            letter: "S",
+            color: "bg-slate-100",
+        },
+        {
+            letter: "D",
+            color: "bg-slate-100",
+        },
+        {
+            letter: "F",
+            color: "bg-slate-100",
+        },
+        {
+            letter: "G",
+            color: "bg-slate-100",
+        },
+        {
+            letter: "H",
+            color: "bg-slate-100",
+        },
+        {
+            letter: "J",
+            color: "bg-slate-100",
+        },
+        {
+            letter: "K",
+            color: "bg-slate-100",
+        },
+        {
+            letter: "L",
+            color: "bg-slate-100",
+        },
+
+        {
+            letter: "Z",
+            color: "bg-slate-100",
+        },
+        {
+            letter: "X",
+            color: "bg-slate-100",
+        },
+        {
+            letter: "C",
+            color: "bg-slate-100",
+        },
+        {
+            letter: "V",
+            color: "bg-slate-100",
+        },
+        {
+            letter: "B",
+            color: "bg-slate-100",
+        },
+        {
+            letter: "N",
+            color: "bg-slate-100",
+        },
+        {
+            letter: "M",
+            color: "bg-slate-100",
+        },
+    ]);
     const [inputValue, setInputValue] = useState("");
     const [warning, setWarning] = useState("");
 
@@ -204,7 +229,22 @@ const Game = () => {
         }
     };
 
-    const updateKeyboard = () => {};
+    const updateKeyboard = (letter, checkResult) => {
+        let lettersCopy = letters.slice();
+        let letterIndex = lettersCopy.findIndex(
+            (x) => x.letter === letter.toUpperCase()
+        );
+
+        if (checkResult === 0) {
+            lettersCopy[letterIndex].color = "bg-lime-500";
+        } else if (checkResult === 1) {
+            lettersCopy[letterIndex].color = "bg-yellow-500";
+        } else {
+            lettersCopy[letterIndex].color = "bg-slate-500";
+        }
+
+        setLetters(lettersCopy);
+    };
 
     const checkLetters = (index) => {
         let guessesCopy = guesses.slice();
@@ -212,13 +252,11 @@ const Game = () => {
         let guessSplit = guessesCopy[index].guessSplit;
         let wordSplit = word.split("");
 
-        console.log(guessSplit);
-        console.log(wordSplit);
-
         for (let i = 0; i < wordSplit.length; i++) {
             if (guessSplit[i] === wordSplit[i]) {
                 guessesCopy[index].letterCheck[i] = 0;
-                guessesCopy[index].letterColor[i] ="bg-lime-500"
+                guessesCopy[index].letterColor[i] = "bg-lime-500";
+                updateKeyboard(guessSplit[i], 0);
             }
             for (let j = 0; j < wordSplit.length; j++) {
                 if (
@@ -226,7 +264,16 @@ const Game = () => {
                     guessSplit[i] !== wordSplit[i]
                 ) {
                     guessesCopy[index].letterCheck[i] = 1;
-                    guessesCopy[index].letterColor[i] ="bg-yellow-500"
+                    guessesCopy[index].letterColor[i] = "bg-yellow-500";
+
+                    updateKeyboard(guessSplit[i], 1);
+                } else if (
+                    guessSplit[i] !== wordSplit[i] &&
+                    guessSplit[i] !== wordSplit[j] &&
+                    guessesCopy[index].letterCheck[i] === ""
+                ) {
+                    guessesCopy[index].letterColor[i] = "bg-slate-500"
+                    updateKeyboard(guessSplit[i], 3);
                 }
             }
         }
@@ -262,9 +309,8 @@ const Game = () => {
             guessesCopy[currentGuessIndex].isWord = false;
             setWarning("I don't think that is a word...");
         }
-        console.log(guesses[currentGuessIndex].isWord);
+
         setGuesses(guessesCopy);
-        console.log(guessesCopy);
     }
 
     useEffect(() => {}, []);
@@ -283,8 +329,6 @@ const Game = () => {
                     inputValue={inputValue}
                     warning={warning}
                     letters={letters}
-
-        
                 />
             </div>
         </div>
