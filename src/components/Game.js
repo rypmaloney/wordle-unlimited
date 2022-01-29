@@ -180,12 +180,12 @@ const Game = () => {
     const [warning, setWarning] = useState("");
 
     const handleGuessChange = (e) => {
-        setInputValue(e.target.value);
+        setInputValue(e.target.value.toUpperCase());
         let currentGuessIndex = findCurrentGuess();
         let guessesCopy = guesses.slice();
 
         if (guessesCopy[currentGuessIndex].guess.length <= 5) {
-            guessesCopy[currentGuessIndex].guess = e.target.value;
+            guessesCopy[currentGuessIndex].guess = e.target.value.toLowerCase();
             for (let i = 0; i <= 4; i++) {
                 guessesCopy[currentGuessIndex].guessSplit[i] = guessesCopy[
                     currentGuessIndex
