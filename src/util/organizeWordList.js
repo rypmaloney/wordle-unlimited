@@ -1,5 +1,4 @@
 const fs = require("fs");
-const https = require("https");
 
 
 let fiveLetterWords = [];
@@ -16,13 +15,13 @@ const organizeWordList = () => {
             data[i].length !== 5 &&
             data[i].length !== 6
         ) {
-        } else if (data[i].length == 5) {
+        } else if (data[i].length === 5) {
             fiveLetterWords.push(data[i]);
             
-        } else if (data[i].length == 6) {
+        } else if (data[i].length === 6) {
             sixLetterWords.push(data[i]);
   
-        } else if (data[i].length == 7) {
+        } else if (data[i].length === 7) {
             sevenLetterWords.push(data[i]);
   
         }
