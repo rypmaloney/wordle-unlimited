@@ -17,15 +17,255 @@ const Game = () => {
         "ached",
     ]);
     const [word, setWord] = useState(wordList[1]);
-    const [guesses, setGuess] = useState();
-    const [guessesSplit, setGuessSplit] = useState([
-        ["A", "P", "P", "L", "E"],
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
+
+    // 0 === correct letter & locaiton
+    // 2 === correct letter, wrong location
+    // 3 === wrong letter, wrong location
+    const [guesses, setGuesses] = useState([
+        {
+            guessMade: false,
+            isWord: true,
+            guess: "",
+            guessSplit: ["", "", "", "", ""],
+            letterCheck: ["", "", "", "", ""],
+            letterColor:["bg-slate-100", "bg-slate-100", "bg-slate-100", "bg-slate-100", "bg-slate-100"]
+        },
+        {
+            guessMade: false,
+            isWord: true,
+            guess: "",
+            guessSplit: ["", "", "", "", ""],
+            letterCheck: ["", "", "", "", ""],
+            letterColor:["bg-slate-100", "bg-slate-100", "bg-slate-100", "bg-slate-100", "bg-slate-100"]
+        },
+        {
+            guessMade: false,
+            isWord: true,
+            guess: "",
+            guessSplit: ["", "", "", "", ""],
+            letterCheck: ["", "", "", "", ""],
+            letterColor:["bg-slate-100", "bg-slate-100", "bg-slate-100", "bg-slate-100", "bg-slate-100"]
+        },
+        {
+            guessMade: false,
+            isWord: true,
+            guess: "",
+            guessSplit: ["", "", "", "", ""],
+            letterCheck: ["", "", "", "", ""],
+            letterColor:["bg-slate-100", "bg-slate-100", "bg-slate-100", "bg-slate-100", "bg-slate-100"]
+        },
+        {
+            guessMade: false,
+            isWord: true,
+            guess: "",
+            guessSplit: ["", "", "", "", ""],
+            letterCheck: ["", "", "", "", ""],
+            letterColor:["bg-slate-100", "bg-slate-100", "bg-slate-100", "bg-slate-100", "bg-slate-100"]
+        },
     ]);
+    const [letters, setLetters] = useState(
+        [
+            {
+                letter: "Q",
+                color: "bg-slate-100",
+            },
+            {
+                letter: "W",
+                color: "bg-slate-100",
+            },
+            {
+                letter: "E",
+                color: "bg-slate-100",
+            },
+            {
+                letter: "R",
+                color: "bg-slate-100",
+            },
+            {
+                letter: "T",
+                color: "bg-slate-100",
+            },
+            {
+                letter: "Y",
+                color: "bg-slate-100",
+            },
+            {
+                letter: "U",
+                color: "bg-slate-100",
+            },
+            {
+                letter: "I",
+                color: "bg-slate-100",
+            },
+            {
+                letter: "O",
+                color: "bg-slate-100",
+            },
+            {
+                letter: "P",
+                color: "bg-slate-100",
+            },
+        ],
+        [
+            {
+                letter: "A",
+                color: "bg-slate-100",
+            },
+            {
+                letter: "S",
+                color: "bg-slate-100",
+            },
+            {
+                letter: "D",
+                color: "bg-slate-100",
+            },
+            {
+                letter: "F",
+                color: "bg-slate-100",
+            },
+            {
+                letter: "G",
+                color: "bg-slate-100",
+            },
+            {
+                letter: "H",
+                color: "bg-slate-100",
+            },
+            {
+                letter: "J",
+                color: "bg-slate-100",
+            },
+            {
+                letter: "K",
+                color: "bg-slate-100",
+            },
+            {
+                letter: "L",
+                color: "bg-slate-100",
+            },
+
+        ],
+        [
+            {
+                letter: "Z",
+                color: "bg-slate-100",
+            },
+            {
+                letter: "X",
+                color: "bg-slate-100",
+            },
+            {
+                letter: "C",
+                color: "bg-slate-100",
+            },
+            {
+                letter: "V",
+                color: "bg-slate-100",
+            },
+            {
+                letter: "B",
+                color: "bg-slate-100",
+            },
+            {
+                letter: "N",
+                color: "bg-slate-100",
+            },
+            {
+                letter: "M",
+                color: "bg-slate-100",
+            },
+        ]
+    );
+    const [inputValue, setInputValue] = useState("");
+    const [warning, setWarning] = useState("");
+
+    const handleGuessChange = (e) => {
+        setInputValue(e.target.value);
+        let currentGuessIndex = findCurrentGuess();
+        let guessesCopy = guesses.slice();
+
+        if (guessesCopy[currentGuessIndex].guess.length <= 5) {
+            guessesCopy[currentGuessIndex].guess = e.target.value;
+            for (let i = 0; i <= 4; i++) {
+                guessesCopy[currentGuessIndex].guessSplit[i] = guessesCopy[
+                    currentGuessIndex
+                ].guess.slice(i, i + 1);
+            }
+        }
+        setGuesses(guessesCopy);
+    };
+
+    const handleSubmitGuess = (e) => {
+        e.preventDefault();
+        let currentGuessIndex = findCurrentGuess();
+        let guessesCopy = guesses.slice();
+        if (guessesCopy[currentGuessIndex].guess.length === 5) {
+            checkWordle(guessesCopy[currentGuessIndex].guess);
+        }
+    };
+
+    const updateKeyboard = () => {};
+
+    const checkLetters = (index) => {
+        let guessesCopy = guesses.slice();
+
+        let guessSplit = guessesCopy[index].guessSplit;
+        let wordSplit = word.split("");
+
+        console.log(guessSplit);
+        console.log(wordSplit);
+
+        for (let i = 0; i < wordSplit.length; i++) {
+            if (guessSplit[i] === wordSplit[i]) {
+                guessesCopy[index].letterCheck[i] = 0;
+                guessesCopy[index].letterColor[i] ="bg-lime-500"
+            }
+            for (let j = 0; j < wordSplit.length; j++) {
+                if (
+                    guessSplit[i] === wordSplit[j] &&
+                    guessSplit[i] !== wordSplit[i]
+                ) {
+                    guessesCopy[index].letterCheck[i] = 1;
+                    guessesCopy[index].letterColor[i] ="bg-yellow-500"
+                }
+            }
+        }
+        setGuesses(guessesCopy);
+    };
+
+    const findCurrentGuess = () => {
+        let currentGuess = null;
+        for (let i = 0; i < guesses.length; i++) {
+            if (guesses[i].guessMade === false && currentGuess === null) {
+                return i;
+            }
+        }
+    };
+
+    async function checkWordle(word) {
+        let currentGuessIndex = findCurrentGuess();
+        let guessesCopy = guesses.slice();
+        const key = "ed92f719-9976-426c-a34f-1fb9d6ceb547";
+        const res = await fetch(
+            `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${key}`
+        );
+        const response = await res.json();
+
+        //Update either input or warning depending on if it is a word
+        if (response[0].meta !== undefined) {
+            guessesCopy[currentGuessIndex].isWord = true;
+            guessesCopy[currentGuessIndex].guessMade = true;
+            setInputValue("");
+            setWarning(response[0].shortdef[0]);
+            checkLetters(currentGuessIndex);
+        } else {
+            guessesCopy[currentGuessIndex].isWord = false;
+            setWarning("I don't think that is a word...");
+        }
+        console.log(guesses[currentGuessIndex].isWord);
+        setGuesses(guessesCopy);
+        console.log(guessesCopy);
+    }
 
     useEffect(() => {}, []);
 
@@ -36,48 +276,19 @@ const Game = () => {
                     Wordle Unlimited
                 </h1>
 
-                <Board guessesSplit={guessesSplit} />
+                <Board
+                    guesses={guesses}
+                    handleGuessChange={handleGuessChange}
+                    handleSubmitGuess={handleSubmitGuess}
+                    inputValue={inputValue}
+                    warning={warning}
+                    letters={letters}
+
+        
+                />
             </div>
         </div>
     );
 };
-
-//Calls random words until it receives one of the appropriate length
-
-//Checks if word IS word, updates isWord
-let isWord;
-function checkIfWord(word) {
-    const key = "ed92f719-9976-426c-a34f-1fb9d6ceb547";
-
-    fetch(
-        `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${key}`,
-        {
-            mode: "cors",
-        }
-    )
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (response) {
-            return response;
-        });
-    // .then((response) => {
-    //     if (response[0].meta) {
-    //         isWord = true;
-    //     } else {
-    //         isWord = false;
-    //     }
-    // });
-}
-
-//same but async function
-async function checkWordle(word) {
-    const key = "ed92f719-9976-426c-a34f-1fb9d6ceb547";
-    const res = await fetch(
-        `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${key}`
-    );
-    const response = await res.json();
-    return response;
-}
 
 export default Game;

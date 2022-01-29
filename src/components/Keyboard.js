@@ -1,4 +1,4 @@
-import { keyboard } from "@testing-library/user-event/dist/keyboard";
+
 import { useEffect, useState } from "react";
 
 const Keyboard = () => {
@@ -21,6 +21,28 @@ const Keyboard = () => {
                 <div className="rounded text-sm text-center border-2 h-8 w-6 py-1">I</div>
                 <div className="rounded text-sm text-center border-2 h-8 w-6 py-1">O</div>
                 <div className="rounded text-sm text-center border-2 h-8 w-6 py-1">P</div>
+            </div>
+            <div className="grid grid-cols-9 gap-1 px-14 ">
+                <div className="rounded text-sm text-center border-2 h-8 w-6 py-1">A</div>
+                <div className="rounded text-sm text-center border-2 h-8 w-6 py-1">S</div>
+                <div className="rounded text-sm text-center border-2 h-8 w-6 py-1">D</div>
+                <div className="rounded text-sm text-center border-2 h-8 w-6 py-1">F</div>
+                <div className="rounded text-sm text-center border-2 h-8 w-6 py-1">G</div>
+                <div className="rounded text-sm text-center border-2 h-8 w-6 py-1">H</div>
+                <div className="rounded text-sm text-center border-2 h-8 w-6 py-1">J</div>
+                <div className="rounded text-sm text-center border-2 h-8 w-6 py-1">K</div>
+                <div className="rounded text-sm text-center border-2 h-8 w-6 py-1">L</div>
+
+
+            </div>
+            <div className="grid grid-cols-7 gap-1 px-20 ">
+                <div className="rounded text-sm text-center border-2 h-8 w-6 py-1">Z</div>
+                <div className="rounded text-sm text-center border-2 h-8 w-6 py-1">X</div>
+                <div className="rounded text-sm text-center border-2 h-8 w-6 py-1">C</div>
+                <div className="rounded text-sm text-center border-2 h-8 w-6 py-1">V</div>
+                <div className="rounded text-sm text-center border-2 h-8 w-6 py-1">B</div>
+                <div className="rounded text-sm text-center border-2 h-8 w-6 py-1">N</div>
+                <div className="rounded text-sm text-center border-2 h-8 w-6 py-1">M</div>
             </div>
 
         </div>
