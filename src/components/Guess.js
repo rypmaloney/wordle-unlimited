@@ -1,5 +1,5 @@
 const Guess = (props) => {
-    const { guess, letterCheck, letterColor  } = props;
+    const { guess, letterColor  } = props;
     
 
     return (
@@ -7,9 +7,8 @@ const Guess = (props) => {
             {guess.map((letter, index) => {
                 return (
                     <div
-                    
-                        className={`box-border h-14 w-14 border-2 flex flex-col justify-center items-center ${letterColor[index]}`}
-                    >
+                        key={index}
+                        className={`box-border h-14 w-14 border-2 flex flex-col justify-center items-center ${letterColor[index]}`}>
                         <p className="text-slate-600 text-4xl uppercase">
                             {letter}
                         </p>

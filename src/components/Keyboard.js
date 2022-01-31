@@ -1,6 +1,4 @@
 
-import { useEffect, useState } from "react";
-
 const Keyboard = (props) => {
     const {letters} = props
 
@@ -10,16 +8,16 @@ const Keyboard = (props) => {
 
 
     return (
-        <div className="pt-4">
-            <div className="grid grid-cols-10 gap-1 px-12 ">
+        <div  className="pt-4">
+            <div className="grid grid-cols-10 gap-1  px-12">
                 {keyRowOne.map(letter =>{
-                    return <div className={`rounded text-sm text-center border-2 h-8 w-6 py-1 ${letter.color}`}>{letter.letter}</div>
+                    return <div key={letter.id} className={`rounded text-sm text-center border-2 h-8 w-6 py-1 ${letter.color}`}>{letter.letter}</div>
                 })}
 
             </div>
-            <div className="grid grid-cols-9 gap-1 px-14 ">
+            <div className="grid grid-cols-9 gap-1 px-14">
             {keyRowTwo.map(letter =>{
-                    return <div className={`rounded text-sm text-center border-2 h-8 w-6 py-1 ${letter.color}`}>{letter.letter}</div>
+                    return <div key={letter.id} className={`rounded text-sm text-center border-2 h-8 w-6 py-1 ${letter.color}`}>{letter.letter}</div>
                 })}
 
 
@@ -27,7 +25,7 @@ const Keyboard = (props) => {
             </div>
             <div className="grid grid-cols-7 gap-1 px-20 ">
             {keyRowThree.map(letter =>{
-                    return <div className={`rounded text-sm text-center border-2 h-8 w-6 py-1 ${letter.color}`}>{letter.letter}</div>
+                    return <div key={letter.id} className={`rounded text-sm text-center border-2 h-8 w-6 py-1 ${letter.color}`}>{letter.letter}</div>
                 })}
 
             </div>
