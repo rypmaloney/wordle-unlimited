@@ -1,9 +1,6 @@
 import { Dialog } from "@headlessui/react";
 
 const Modal = ({ isOpen, setIsOpen, gameResult, word, newGame }) => {
-    const reload = () => {
-        window.location.relaod(false);
-    };
 
     return (
         <Dialog
@@ -17,9 +14,9 @@ const Modal = ({ isOpen, setIsOpen, gameResult, word, newGame }) => {
                     <Dialog.Title className="text-xl">
                         You {gameResult}!
                     </Dialog.Title>
-                    <Dialog.Description className="text-xl">
-                        <p> The word was {word.word.toUpperCase()}. </p>
-                        <p>{word.definitions[0].definition}.</p>
+                    <Dialog.Description className="text-sm">
+                        The word was <em>{word.word.toUpperCase()}</em>.<br />
+                        "{word.definitions[0].definition}"
                     </Dialog.Description>
                     <button
                         className="border-black border-solid border text-lg rounded mx-1 mt-4 py-1 px-2"

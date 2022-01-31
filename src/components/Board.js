@@ -5,22 +5,18 @@ import Guess from "./Guess";
 
 function Board(props) {
     const {
-        guessesSplit,
         handleGuessChange,
         guesses,
         handleSubmitGuess,
         inputValue,
         warning,
         letters,
-
+        handleLetterClick,
     } = props;
 
-
-
-    
     return (
         <div>
-            <div className="px-16">
+            <div className="max-w-md px-10 sm:px-16">
                 {guesses.map((guess) => {
                     return (
                         <Guess
@@ -31,27 +27,27 @@ function Board(props) {
                     );
                 })}
 
-                <Keyboard letters={letters} />
+                <p className="text-sm pt-2 mb-0 ml-10 h-2 text-red-500">{warning}</p>
 
-                <p className="text-sm pt-2 mb-0 h-2 text-red-500">
-                    {warning}
-                </p>
-
-                <form onSubmit={handleSubmitGuess} className="form-inline mt-0 col-span-2">
-                    <input
-                        onChange={handleGuessChange}
-                        className="form-control border border-solid border-slate-600 text-slate-700 text-lg text-center rounded-ms h-10 w-full"
-                        type="text"
-                        placeholder="type your guess"
-                        maxLength={5}
-                        value={inputValue}
+                <form
+                    onSubmit={handleSubmitGuess}
+                    className="form-inline mt-6 "
+                >
+                    <div className="flex justify-center ">
+                        <input
+                            onChange={handleGuessChange}
+                            className="form-control border border-solid border-slate-600 text-slate-700 text-lg text-center rounded-ms h-10 w-4/5 mx-auto"
+                            type="text"
+                            placeholder="type your guess"
+                            maxLength={5}
+                            value={inputValue}
+                        />
+                    </div>
+                    <Keyboard
+                        letters={letters}
+                        handleLetterClick={handleLetterClick}
+                        handleSubmitGuess={handleSubmitGuess}
                     />
-                    <button
-                        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-1 my-1 px-4 w rounded text-sm focus:outline-none focus:shadow-outline float-right"
-                        type="submit"
-                    >
-                        Submit
-                    </button>
                 </form>
             </div>
         </div>
