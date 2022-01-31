@@ -7,21 +7,135 @@ import Board from "./Board";
 
 const list = require("../util/lists/processedWords.json")
 const shuffledList = shuffle(list)
+const initialGuessList = [
+    {
+        guessMade: false,
+        isWord: true,
+        guess: "",
+        guessSplit: ["", "", "", "", ""],
+        letterCheck: ["", "", "", "", ""],
+        letterColor: [
+            "bg-slate-100",
+            "bg-slate-100",
+            "bg-slate-100",
+            "bg-slate-100",
+            "bg-slate-100",
+        ],
+        id: uniqid(),
+    },
+    {
+        guessMade: false,
+        isWord: true,
+        guess: "",
+        guessSplit: ["", "", "", "", ""],
+        letterCheck: ["", "", "", "", ""],
+        letterColor: [
+            "bg-slate-100",
+            "bg-slate-100",
+            "bg-slate-100",
+            "bg-slate-100",
+            "bg-slate-100",
+        ],
+        id: uniqid(),
+    },
+    {
+        guessMade: false,
+        isWord: true,
+        guess: "",
+        guessSplit: ["", "", "", "", ""],
+        letterCheck: ["", "", "", "", ""],
+        letterColor: [
+            "bg-slate-100",
+            "bg-slate-100",
+            "bg-slate-100",
+            "bg-slate-100",
+            "bg-slate-100",
+        ],
+        id: uniqid(),
+    },
+    {
+        guessMade: false,
+        isWord: true,
+        guess: "",
+        guessSplit: ["", "", "", "", ""],
+        letterCheck: ["", "", "", "", ""],
+        letterColor: [
+            "bg-slate-100",
+            "bg-slate-100",
+            "bg-slate-100",
+            "bg-slate-100",
+            "bg-slate-100",
+        ],
+        id: uniqid(),
+    },
+    {
+        guessMade: false,
+        isWord: true,
+        guess: "",
+        guessSplit: ["", "", "", "", ""],
+        letterCheck: ["", "", "", "", ""],
+        letterColor: [
+            "bg-slate-100",
+            "bg-slate-100",
+            "bg-slate-100",
+            "bg-slate-100",
+            "bg-slate-100",
+        ],
+        id: uniqid(),
+    },
+    {
+        guessMade: false,
+        isWord: true,
+        guess: "",
+        guessSplit: ["", "", "", "", ""],
+        letterCheck: ["", "", "", "", ""],
+        letterColor: [
+            "bg-slate-100",
+            "bg-slate-100",
+            "bg-slate-100",
+            "bg-slate-100",
+            "bg-slate-100",
+        ],
+        id: uniqid(),
+    },
+]
 
 const Game = () => {
 
     
 
-    const [gameNumber, setGameNumber] = useState(0)
-    const [wordList, setWordList] = useState(shuffledList);
-    const [word, setWord] = useState(wordList[0]);
+    const [gameNumber, setGameNumber] = useState(()=>{
+        const saved = localStorage.getItem("gameNumber");
+        const initialValue = JSON.parse(saved);
+        return initialValue || 0});
 
+
+
+    const [wordList, setWordList] = useState(() =>{
+        const saved = localStorage.getItem("wordList");
+        const initialValue = JSON.parse(saved);
+        return initialValue || shuffledList});
+
+
+        const [word, setWord] = useState(() =>{
+            const saved = localStorage.getItem("word");
+            const initialValue = JSON.parse(saved);
+            return initialValue || wordList[0]})
     // 0 === correct letter & locaiton
     // 2 === correct letter, wrong location
     // 3 === wrong letter, wrong location
 
-    const[guessIndex, setGuessIndex]= useState(0)
-    const [guesses, setGuesses] = useState([
+    const[guessIndex, setGuessIndex]= useState(() =>{
+        const saved = localStorage.getItem("guessIndex");
+        const initialValue = JSON.parse(saved);
+        return initialValue || 0})
+
+
+
+    const [guesses, setGuesses] = useState(() =>{
+        const saved = localStorage.getItem("guesses");
+        const initialValue = JSON.parse(saved);
+        return initialValue || [
         {
             guessMade: false,
             isWord: true,
@@ -112,7 +226,7 @@ const Game = () => {
             ],
             id: uniqid(),
         },
-    ]);
+    ]});
     const [letters, setLetters] = useState([
         {
             letter: "Q",
@@ -278,27 +392,104 @@ const Game = () => {
         historyCopy.push(previousGame)
         setGameHistory(historyCopy)
 
-        
+        let newGameNum = gameNumber +1
         //makes a new game
-        setGameNumber(0)
-        setWord(wordList)
+        setGameNumber(newGameNum)
+        setWord(wordList[newGameNum])
         setGuessIndex(0)
         
-        setGuesses(Array(6).fill({
-            guessMade: false,
-            isWord: true,
-            guess: "",
-            guessSplit: ["", "", "", "", ""],
-            letterCheck: ["", "", "", "", ""],
-            letterColor: [
-                "bg-slate-100",
-                "bg-slate-100",
-                "bg-slate-100",
-                "bg-slate-100",
-                "bg-slate-100",
-            ],
-            id: uniqid(),
-        }))
+        setGuesses([
+            {
+                guessMade: false,
+                isWord: true,
+                guess: "",
+                guessSplit: ["", "", "", "", ""],
+                letterCheck: ["", "", "", "", ""],
+                letterColor: [
+                    "bg-slate-100",
+                    "bg-slate-100",
+                    "bg-slate-100",
+                    "bg-slate-100",
+                    "bg-slate-100",
+                ],
+                id: uniqid(),
+            },
+            {
+                guessMade: false,
+                isWord: true,
+                guess: "",
+                guessSplit: ["", "", "", "", ""],
+                letterCheck: ["", "", "", "", ""],
+                letterColor: [
+                    "bg-slate-100",
+                    "bg-slate-100",
+                    "bg-slate-100",
+                    "bg-slate-100",
+                    "bg-slate-100",
+                ],
+                id: uniqid(),
+            },
+            {
+                guessMade: false,
+                isWord: true,
+                guess: "",
+                guessSplit: ["", "", "", "", ""],
+                letterCheck: ["", "", "", "", ""],
+                letterColor: [
+                    "bg-slate-100",
+                    "bg-slate-100",
+                    "bg-slate-100",
+                    "bg-slate-100",
+                    "bg-slate-100",
+                ],
+                id: uniqid(),
+            },
+            {
+                guessMade: false,
+                isWord: true,
+                guess: "",
+                guessSplit: ["", "", "", "", ""],
+                letterCheck: ["", "", "", "", ""],
+                letterColor: [
+                    "bg-slate-100",
+                    "bg-slate-100",
+                    "bg-slate-100",
+                    "bg-slate-100",
+                    "bg-slate-100",
+                ],
+                id: uniqid(),
+            },
+            {
+                guessMade: false,
+                isWord: true,
+                guess: "",
+                guessSplit: ["", "", "", "", ""],
+                letterCheck: ["", "", "", "", ""],
+                letterColor: [
+                    "bg-slate-100",
+                    "bg-slate-100",
+                    "bg-slate-100",
+                    "bg-slate-100",
+                    "bg-slate-100",
+                ],
+                id: uniqid(),
+            },
+            {
+                guessMade: false,
+                isWord: true,
+                guess: "",
+                guessSplit: ["", "", "", "", ""],
+                letterCheck: ["", "", "", "", ""],
+                letterColor: [
+                    "bg-slate-100",
+                    "bg-slate-100",
+                    "bg-slate-100",
+                    "bg-slate-100",
+                    "bg-slate-100",
+                ],
+                id: uniqid(),
+            },
+        ])
 
 
         setLetters([
@@ -581,7 +772,13 @@ const Game = () => {
         }
     };
 
-    useEffect(() => {}, []);
+    useEffect(() => {
+        localStorage.setItem("guesses", JSON.stringify(guesses));
+        localStorage.setItem("wordList", JSON.stringify(wordList))
+        localStorage.setItem("word", JSON.stringify(word))
+        localStorage.setItem("gameNumber", JSON.stringify(gameNumber));
+        localStorage.setItem("guessIndex", JSON.stringify(guessIndex))
+    }, [guesses, wordList, word, gameNumber, guessIndex]);
 
     return (
         <div className="h-screen bg-gray-50">
@@ -599,12 +796,13 @@ const Game = () => {
                     letters={letters}
                 />
             </div>
-            <Modal
+             <Modal
                 setIsOpen={setEndModalIsOpen}
                 isOpen={endModalIsOpen}
                 word={word}
                 gameResult={gameResult}
-            />
+                newGame={newGame}
+            /> 
         </div>
     );
 };

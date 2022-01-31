@@ -1,3 +1,7 @@
+///This script uses WORDSAPI to get definitions for all of the 5 letter words pulled from the Random Word API.
+//Only saves word if there is a definition in their lib. This removes most of the obscure ones.
+
+
 var axios = require("axios").default;
 const fs = require("fs");
 
