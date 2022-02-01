@@ -104,150 +104,149 @@ const initialGuessList = [
     },
 ];
 const initialLetters = [
-        {
-            letter: "Q",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-        {
-            letter: "W",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-        {
-            letter: "E",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-        {
-            letter: "R",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-        {
-            letter: "T",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-        {
-            letter: "Y",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-        {
-            letter: "U",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-        {
-            letter: "I",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-        {
-            letter: "O",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-        {
-            letter: "P",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
+    {
+        letter: "Q",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+    {
+        letter: "W",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+    {
+        letter: "E",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+    {
+        letter: "R",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+    {
+        letter: "T",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+    {
+        letter: "Y",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+    {
+        letter: "U",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+    {
+        letter: "I",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+    {
+        letter: "O",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+    {
+        letter: "P",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
 
-        {
-            letter: "A",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-        {
-            letter: "S",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-        {
-            letter: "D",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-        {
-            letter: "F",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-        {
-            letter: "G",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-        {
-            letter: "H",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-        {
-            letter: "J",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-        {
-            letter: "K",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-        {
-            letter: "L",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
+    {
+        letter: "A",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+    {
+        letter: "S",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+    {
+        letter: "D",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+    {
+        letter: "F",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+    {
+        letter: "G",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+    {
+        letter: "H",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+    {
+        letter: "J",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+    {
+        letter: "K",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+    {
+        letter: "L",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
 
-        {
-            letter: "Z",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-        {
-            letter: "X",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-        {
-            letter: "C",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-        {
-            letter: "V",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-        {
-            letter: "B",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-        {
-            letter: "N",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-        {
-            letter: "M",
-            color: "bg-slate-100",
-            id: uniqid(),
-        },
-    ]
-    const initialStats = {
-        wins: 0,
-        gamesPlayed: 0,
-        guessOneWins: 0,
-        guessTwoWins: 0,
-        guessThreeWins: 2,
-        guessFourWins: 0,
-        guessFiveWins: 0,
-        guessSixWins: 4,
-    }
-
+    {
+        letter: "Z",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+    {
+        letter: "X",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+    {
+        letter: "C",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+    {
+        letter: "V",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+    {
+        letter: "B",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+    {
+        letter: "N",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+    {
+        letter: "M",
+        color: "bg-slate-100",
+        id: uniqid(),
+    },
+];
+const initialStats = {
+    wins: 0,
+    gamesPlayed: 0,
+    guessOneWins: 0,
+    guessTwoWins: 0,
+    guessThreeWins: 2,
+    guessFourWins: 0,
+    guessFiveWins: 0,
+    guessSixWins: 4,
+};
 
 const Game = () => {
     const [darkEnabled, setDarkEnabled] = useState("light");
@@ -283,12 +282,11 @@ const Game = () => {
         const initialValue = JSON.parse(saved);
         return initialValue || initialGuessList.slice();
     });
-    const [letters, setLetters] = useState(()=>{
+    const [letters, setLetters] = useState(() => {
         const saved = localStorage.getItem("letters");
         const initialValue = JSON.parse(saved);
-        return initialValue || initialLetters.slice()
-    } );
-
+        return initialValue || initialLetters.slice();
+    });
 
     const [gameHistory, setGameHistory] = useState([
         {
@@ -301,8 +299,7 @@ const Game = () => {
     const [stats, setStats] = useState(() => {
         const saved = localStorage.getItem("stats");
         const initialValue = JSON.parse(saved);
-        return initialValue || initialStats.slice()
-
+        return initialValue || initialStats.slice();
     });
     const [gameResult, setGameResult] = useState("lost");
 
@@ -463,7 +460,7 @@ const Game = () => {
                 color: "bg-slate-100",
                 id: uniqid(),
             },
-    
+
             {
                 letter: "A",
                 color: "bg-slate-100",
@@ -509,7 +506,7 @@ const Game = () => {
                 color: "bg-slate-100",
                 id: uniqid(),
             },
-    
+
             {
                 letter: "Z",
                 color: "bg-slate-100",
@@ -546,62 +543,57 @@ const Game = () => {
                 id: uniqid(),
             },
         ]);
-
     };
 
     const tabulateStats = () => {
-                
-        
-                //Commits the previous game to state
-                let previousGame = {
-                    gameNumber: gameNumber,
-                    word: word,
-                    didWin: gameResult,
-                    guesses: guessIndex,
-                };
-        
-                let historyCopy = gameHistory;
-                historyCopy.push(previousGame);
-                setGameHistory(historyCopy);
-        
-        
+        //Commits the previous game to state
+        let previousGame = {
+            gameNumber: gameNumber,
+            word: word,
+            didWin: gameResult,
+            guesses: guessIndex,
+        };
+
+        let historyCopy = gameHistory;
+        historyCopy.push(previousGame);
+        setGameHistory(historyCopy);
+
         //Make Stats
 
-                let statsCopy = Object.assign({}, stats);
-                statsCopy.gamesPlayed +=1;
-                if(gameResult==="won"){
-                    statsCopy.wins +=1
-                }
-                console.log("endgame" + guessIndex)
+        let statsCopy = Object.assign({}, stats);
+        statsCopy.gamesPlayed += 1;
+        if (gameResult === "won") {
+            statsCopy.wins += 1;
+        }
 
-                let winRound = guessIndex 
-       
-                switch (winRound) {
-                    case  0:
-                        statsCopy.guessOneWins += 1;
-                        break;
-                   case 1:
-                       console.log("second guess")
-                       statsCopy.guessTwoWins += 1;
-                        break;
-                    case 2:
-                        statsCopy.guessThreeWins += 1;
-                       break;
-                    case  3:
-                       statsCopy.guessFourWins += 1;
-                        break;
-                     case 4:
-                        statsCopy.guessFiveWins += 1;
-                        break;
-                    case  5:
-                        statsCopy.guessSixWins += 1;
-                        break;
-                    default:
-                        console.log("stats is broken");
-                }
-                setStats(statsCopy)
-                console.log(stats)
-    }
+        let winRound = guessIndex;
+
+        switch (winRound) {
+            case 0:
+                statsCopy.guessOneWins += 1;
+                break;
+            case 1:
+
+                statsCopy.guessTwoWins += 1;
+                break;
+            case 2:
+                statsCopy.guessThreeWins += 1;
+                break;
+            case 3:
+                statsCopy.guessFourWins += 1;
+                break;
+            case 4:
+                statsCopy.guessFiveWins += 1;
+                break;
+            case 5:
+                statsCopy.guessSixWins += 1;
+                break;
+            default:
+                console.log("stats is broken");
+        }
+        setStats(statsCopy);
+
+    };
 
     const handleGuessChange = (e) => {
         setWarning("");
@@ -680,8 +672,6 @@ const Game = () => {
                 }
             }, i * 300);
             setGuesses(guessesCopy);
-
-        
         }
     };
 
@@ -722,7 +712,7 @@ const Game = () => {
                 setEndModalIsOpen(true);
             }, 1500);
             setGameResult("won");
-            tabulateStats()
+            tabulateStats();
         } else if (
             !isEqual(submittedGuess, word.word.split("")) &&
             guessIndex === 5
@@ -731,7 +721,7 @@ const Game = () => {
                 setEndModalIsOpen(true);
             }, 1500);
             setGameResult("lost");
-            tabulateStats()
+            tabulateStats();
         }
     };
 
@@ -739,7 +729,6 @@ const Game = () => {
         if (inputValue.length < 5) {
             let call = inputValue + e.target.id;
             setInputValue(call);
-
 
             let guessesCopy = guesses.slice();
 
@@ -755,6 +744,26 @@ const Game = () => {
         }
     };
 
+    const handleDeleteLetter = () => {
+
+        if (inputValue.length > 0) {
+            let call = inputValue.slice(0, -1);
+            setInputValue(call);
+
+             let guessesCopy = guesses.slice();
+
+             if (guessesCopy[guessIndex].guess.length <= 5) {
+                 guessesCopy[guessIndex].guess = call.toLowerCase();
+                 for (let i = 0; i < 5; i++) {
+                     guessesCopy[guessIndex].guessSplit[i] = guessesCopy[
+                         guessIndex
+                     ].guess.slice(i, i + 1);
+                 }
+             }
+             setGuesses(guessesCopy);
+        }
+    };
+
     useEffect(() => {
         localStorage.setItem("letters", JSON.stringify(letters));
         localStorage.setItem("stats", JSON.stringify(stats));
@@ -767,7 +776,6 @@ const Game = () => {
 
     return (
         <div className={darkEnabled}>
-
             <div className={` bg-gray-50  dark:bg-gray-800 pb-10`}>
                 <Nav
                     darkEnabled={darkEnabled}
@@ -775,7 +783,7 @@ const Game = () => {
                     newGame={newGame}
                     setStatsModalIsOpen={setStatsModalIsOpen}
                 />
-                
+
                 <div className="max-w-md min-w-md mx-auto">
                     <h1 className="text-3xl font-bold text-slate-600 dark:text-slate-200 text-center mx-auto p-3">
                         W<span className="text-yellow-500">o</span>rd
@@ -785,6 +793,7 @@ const Game = () => {
 
                     <Board
                         handleLetterClick={handleLetterClick}
+                        handleDeleteLetter={handleDeleteLetter}
                         guesses={guesses}
                         handleGuessChange={handleGuessChange}
                         handleSubmitGuess={handleSubmitGuess}
@@ -800,7 +809,7 @@ const Game = () => {
                     gameResult={gameResult}
                     newGame={newGame}
                 />
-                <StatsModal 
+                <StatsModal
                     setIsOpen={setStatsModalIsOpen}
                     isOpen={statsModalIsOpen}
                     stats={stats}

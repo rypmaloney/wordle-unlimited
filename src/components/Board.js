@@ -12,6 +12,7 @@ function Board(props) {
         warning,
         letters,
         handleLetterClick,
+        handleDeleteLetter
     } = props;
 
     return (
@@ -31,6 +32,7 @@ function Board(props) {
 
                 <form
                     onSubmit={handleSubmitGuess}
+    
                     className="form-inline mt-6 "
                 >
                     <div className="flex justify-center ">
@@ -41,14 +43,26 @@ function Board(props) {
                             placeholder="type your guess"
                             maxLength={5}
                             value={inputValue}
+                            autoFocus
                         />
                     </div>
-                    <Keyboard
+
+                </form>
+                <Keyboard
+                        handleDeleteLetter={handleDeleteLetter}
                         letters={letters}
                         handleLetterClick={handleLetterClick}
                         handleSubmitGuess={handleSubmitGuess}
                     />
-                </form>
+                <button onClick={handleDeleteLetter} className="hover:bg-gray-700 text-white font-bold py-1 my-1 px-4 w rounded text-xs focus:outline-none focus:shadow-outline float-left bg-red-700">
+                delete
+            </button>
+            <button
+                onClick={handleSubmitGuess}
+                className="hover:bg-gray-700 text-white font-bold py-1 my-1 px-4 w rounded text-xs focus:outline-none focus:shadow-outline float-right bg-lime-700"
+            >
+                Submit
+            </button>
             </div>
         </div>
     );

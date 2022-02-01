@@ -1,5 +1,5 @@
 const Keyboard = (props) => {
-    const { letters, handleLetterClick, handleSubmitGuess } = props;
+    const { letters, handleLetterClick, handleSubmitGuess, handleDeleteLetter={handleDeleteLetter} } = props;
 
     let keyRowOne = letters.slice(0, 10);
     let keyRowTwo = letters.slice(10, 19);
@@ -49,15 +49,7 @@ const Keyboard = (props) => {
                     );
                 })}
             </div>
-            <button className="hover:bg-gray-700 text-white font-bold py-1 my-1 px-4 w rounded text-xs focus:outline-none focus:shadow-outline float-left bg-red-700">
-                delete
-            </button>
-            <button
-                onClick={handleSubmitGuess}
-                className="hover:bg-gray-700 text-white font-bold py-1 my-1 px-4 w rounded text-xs focus:outline-none focus:shadow-outline float-right bg-lime-700"
-            >
-                Submit
-            </button>
+
         </div>
     );
 };
