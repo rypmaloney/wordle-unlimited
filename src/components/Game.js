@@ -6,247 +6,72 @@ import Modal from "./endModal";
 import Board from "./Board";
 import Nav from "./Nav";
 import StatsModal from "./StatsModal";
-import { tab } from "@testing-library/user-event/dist/tab";
+
 
 const list = require("../util/lists/processedWords.json");
 
 const shuffledList = shuffle(list);
-const initialGuessList = [
-    {
-        guessMade: false,
-        isWord: true,
-        guess: "",
-        guessSplit: ["", "", "", "", ""],
-        letterCheck: ["", "", "", "", ""],
-        letterColor: [
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-        ],
-        id: uniqid(),
-    },
-    {
-        guessMade: false,
-        isWord: true,
-        guess: "",
-        guessSplit: ["", "", "", "", ""],
-        letterCheck: ["", "", "", "", ""],
-        letterColor: [
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-        ],
-        id: uniqid(),
-    },
-    {
-        guessMade: false,
-        isWord: true,
-        guess: "",
-        guessSplit: ["", "", "", "", ""],
-        letterCheck: ["", "", "", "", ""],
-        letterColor: [
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-        ],
-        id: uniqid(),
-    },
-    {
-        guessMade: false,
-        isWord: true,
-        guess: "",
-        guessSplit: ["", "", "", "", ""],
-        letterCheck: ["", "", "", "", ""],
-        letterColor: [
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-        ],
-        id: uniqid(),
-    },
-    {
-        guessMade: false,
-        isWord: true,
-        guess: "",
-        guessSplit: ["", "", "", "", ""],
-        letterCheck: ["", "", "", "", ""],
-        letterColor: [
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-        ],
-        id: uniqid(),
-    },
-    {
-        guessMade: false,
-        isWord: true,
-        guess: "",
-        guessSplit: ["", "", "", "", ""],
-        letterCheck: ["", "", "", "", ""],
-        letterColor: [
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-            "bg-slate-100 dark:bg-gray-300 ",
-        ],
-        id: uniqid(),
-    },
-];
-const initialLetters = [
-    {
-        letter: "Q",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-    {
-        letter: "W",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-    {
-        letter: "E",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-    {
-        letter: "R",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-    {
-        letter: "T",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-    {
-        letter: "Y",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-    {
-        letter: "U",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-    {
-        letter: "I",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-    {
-        letter: "O",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-    {
-        letter: "P",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
 
-    {
-        letter: "A",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-    {
-        letter: "S",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-    {
-        letter: "D",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-    {
-        letter: "F",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-    {
-        letter: "G",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-    {
-        letter: "H",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-    {
-        letter: "J",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-    {
-        letter: "K",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-    {
-        letter: "L",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-
-    {
-        letter: "Z",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-    {
-        letter: "X",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-    {
-        letter: "C",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-    {
-        letter: "V",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-    {
-        letter: "B",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-    {
-        letter: "N",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-    {
-        letter: "M",
-        color: "bg-slate-100",
-        id: uniqid(),
-    },
-];
-const initialStats = {
-    wins: 0,
-    gamesPlayed: 0,
-    guessOneWins: 0,
-    guessTwoWins: 0,
-    guessThreeWins: 2,
-    guessFourWins: 0,
-    guessFiveWins: 0,
-    guessSixWins: 4,
+const generateInitialGuessList = (wordLength) => {
+    let list = [];
+    for (let i = 0; i < 6; i++) {
+        list.push({
+            guessMade: false,
+            isWord: true,
+            guess: "",
+            guessSplit: Array(wordLength).fill(""),
+            letterCheck: Array(wordLength).fill(""),
+            letterColor: Array(wordLength).fill(
+                "bg-slate-100 dark:bg-gray-300 "
+            ),
+            id: uniqid(),
+        });
+    }
+    return list;
 };
+const generateInitialLettersList = (wordLength) => {
+    const keyboardArray = [
+        "Q",
+        "W",
+        "E",
+        "R",
+        "T",
+        "Y",
+        "U",
+        "I",
+        "O",
+        "P",
+        "A",
+        "S",
+        "D",
+        "F",
+        "G",
+        "H",
+        "J",
+        "K",
+        "L",
+        "Z",
+        "X",
+        "C",
+        "V",
+        "B",
+        "N",
+        "M",
+    ];
+    let list = []
+
+    keyboardArray.forEach((letter)=>{
+        list.push(
+            {
+                letter: letter,
+                color: "bg-slate-100",
+                id: uniqid(),
+            }
+        )
+    })
+    return list
+};
+
 
 const Game = () => {
     const [darkEnabled, setDarkEnabled] = useState("light");
@@ -280,12 +105,12 @@ const Game = () => {
     const [guesses, setGuesses] = useState(() => {
         const saved = localStorage.getItem("guesses");
         const initialValue = JSON.parse(saved);
-        return initialValue || initialGuessList.slice();
+        return initialValue || generateInitialGuessList(5);
     });
     const [letters, setLetters] = useState(() => {
         const saved = localStorage.getItem("letters");
         const initialValue = JSON.parse(saved);
-        return initialValue || initialLetters.slice();
+        return initialValue || generateInitialLettersList();
     });
 
     const [gameHistory, setGameHistory] = useState([
@@ -299,7 +124,18 @@ const Game = () => {
     const [stats, setStats] = useState(() => {
         const saved = localStorage.getItem("stats");
         const initialValue = JSON.parse(saved);
-        return initialValue || initialStats.slice();
+        return (
+            initialValue || {
+                wins: 0,
+                gamesPlayed: 0,
+                guessOneWins: 0,
+                guessTwoWins: 0,
+                guessThreeWins: 0,
+                guessFourWins: 0,
+                guessFiveWins: 0,
+                guessSixWins: 0,
+            }
+        );
     });
     const [gameResult, setGameResult] = useState("lost");
 
@@ -317,232 +153,8 @@ const Game = () => {
         setWord(wordList[newGameNum]);
         setGuessIndex(0);
 
-        setGuesses([
-            {
-                guessMade: false,
-                isWord: true,
-                guess: "",
-                guessSplit: ["", "", "", "", ""],
-                letterCheck: ["", "", "", "", ""],
-                letterColor: [
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                ],
-                id: uniqid(),
-            },
-            {
-                guessMade: false,
-                isWord: true,
-                guess: "",
-                guessSplit: ["", "", "", "", ""],
-                letterCheck: ["", "", "", "", ""],
-                letterColor: [
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                ],
-                id: uniqid(),
-            },
-            {
-                guessMade: false,
-                isWord: true,
-                guess: "",
-                guessSplit: ["", "", "", "", ""],
-                letterCheck: ["", "", "", "", ""],
-                letterColor: [
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                ],
-                id: uniqid(),
-            },
-            {
-                guessMade: false,
-                isWord: true,
-                guess: "",
-                guessSplit: ["", "", "", "", ""],
-                letterCheck: ["", "", "", "", ""],
-                letterColor: [
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                ],
-                id: uniqid(),
-            },
-            {
-                guessMade: false,
-                isWord: true,
-                guess: "",
-                guessSplit: ["", "", "", "", ""],
-                letterCheck: ["", "", "", "", ""],
-                letterColor: [
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                ],
-                id: uniqid(),
-            },
-            {
-                guessMade: false,
-                isWord: true,
-                guess: "",
-                guessSplit: ["", "", "", "", ""],
-                letterCheck: ["", "", "", "", ""],
-                letterColor: [
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                    "bg-slate-100 dark:bg-gray-300 ",
-                ],
-                id: uniqid(),
-            },
-        ]);
-        setLetters([
-            {
-                letter: "Q",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-            {
-                letter: "W",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-            {
-                letter: "E",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-            {
-                letter: "R",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-            {
-                letter: "T",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-            {
-                letter: "Y",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-            {
-                letter: "U",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-            {
-                letter: "I",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-            {
-                letter: "O",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-            {
-                letter: "P",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-
-            {
-                letter: "A",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-            {
-                letter: "S",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-            {
-                letter: "D",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-            {
-                letter: "F",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-            {
-                letter: "G",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-            {
-                letter: "H",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-            {
-                letter: "J",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-            {
-                letter: "K",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-            {
-                letter: "L",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-
-            {
-                letter: "Z",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-            {
-                letter: "X",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-            {
-                letter: "C",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-            {
-                letter: "V",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-            {
-                letter: "B",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-            {
-                letter: "N",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-            {
-                letter: "M",
-                color: "bg-slate-100",
-                id: uniqid(),
-            },
-        ]);
+        setGuesses(() => generateInitialGuessList(5));
+        setLetters(() => generateInitialLettersList());
     };
 
     const tabulateStats = () => {
@@ -573,7 +185,6 @@ const Game = () => {
                 statsCopy.guessOneWins += 1;
                 break;
             case 1:
-
                 statsCopy.guessTwoWins += 1;
                 break;
             case 2:
@@ -592,7 +203,6 @@ const Game = () => {
                 console.log("stats is broken");
         }
         setStats(statsCopy);
-
     };
 
     const handleGuessChange = (e) => {
@@ -745,22 +355,21 @@ const Game = () => {
     };
 
     const handleDeleteLetter = () => {
-
         if (inputValue.length > 0) {
             let call = inputValue.slice(0, -1);
             setInputValue(call);
 
-             let guessesCopy = guesses.slice();
+            let guessesCopy = guesses.slice();
 
-             if (guessesCopy[guessIndex].guess.length <= 5) {
-                 guessesCopy[guessIndex].guess = call.toLowerCase();
-                 for (let i = 0; i < 5; i++) {
-                     guessesCopy[guessIndex].guessSplit[i] = guessesCopy[
-                         guessIndex
-                     ].guess.slice(i, i + 1);
-                 }
-             }
-             setGuesses(guessesCopy);
+            if (guessesCopy[guessIndex].guess.length <= 5) {
+                guessesCopy[guessIndex].guess = call.toLowerCase();
+                for (let i = 0; i < 5; i++) {
+                    guessesCopy[guessIndex].guessSplit[i] = guessesCopy[
+                        guessIndex
+                    ].guess.slice(i, i + 1);
+                }
+            }
+            setGuesses(guessesCopy);
         }
     };
 
