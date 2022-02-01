@@ -36,7 +36,7 @@ function Board(props) {
                     <div className="flex justify-center ">
                         <input
                             onChange={handleGuessChange}
-                            className="form-control border border-solid border-slate-600 text-slate-700 text-lg text-center rounded-ms h-10 w-4/5 mx-auto"
+                            className="form-control border border-solid border-slate-600 text-slate-700 dark:bg-gray-200 text-lg text-center rounded-ms h-10 w-4/5 mx-auto"
                             type="text"
                             placeholder="type your guess"
                             maxLength={5}

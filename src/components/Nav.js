@@ -2,16 +2,18 @@ import ModeToggle from "./ModeToggle";
 
 
 const Nav = (props) => {
-    const {darkEnabled, setDarkEnabled} = props
+    const {darkEnabled, setDarkEnabled, newGame, setStatsModalIsOpen} = props
 
 
     return (
         <div>
-            <div className="bg-slate-600 w-full h-8">
+            <div className="bg-slate-600 w-full h-8 flex">
                 <ModeToggle darkEnabled={darkEnabled} setDarkEnabled={setDarkEnabled} />
-                <div className="text-xl text-white w-6 h-6 rounded border-2 border-white p-2">
-                    ?
-                </div>
+
+                <button className="text-sm text-white mr-1 my-1 rounded w-24 bg-slate-500 ml-auto align-right" onClick={()=>{setStatsModalIsOpen(true)}}>Stats</button>
+                <button className="text-sm text-white mx-8 my-1 rounded w-24 bg-slate-500"onClick={ ()=>newGame()}>New Game</button>
+
+               
             </div>
         </div>
     );

@@ -6,7 +6,7 @@ const Keyboard = (props) => {
     let keyRowThree = letters.slice(19, 27);
 
     return (
-        <div className=" pt-4">
+        <div className="py-4 ">
             <div className="grid grid-cols-10 gap-1 px-6 md:px-12">
                 {keyRowOne.map((letter) => {
                     return (
@@ -14,7 +14,7 @@ const Keyboard = (props) => {
                             id={letter.letter}
                             key={letter.id}
                             onClick={handleLetterClick}
-                            className={`dark:bg-slate-500 cursor-pointer hover:bg-gray-300 rounded text-sm text-center border-2 h-8 w-6 py-1 ${letter.color}`}
+                            className={`cursor-pointer hover:bg-gray-300 rounded text-sm text-center border-2 dark:border-gray-600 h-8 w-6 py-1 ${letter.color}`}
                         >
                             {letter.letter}
                         </div>
@@ -28,7 +28,7 @@ const Keyboard = (props) => {
                             id={letter.letter}
                             key={letter.id}
                             onClick={handleLetterClick}
-                            className={` dark:bg-slate-500 cursor-pointer hover:bg-gray-300 rounded text-sm text-center border-2 h-8 w-6 py-1 ${letter.color}`}
+                            className={`  dark:border-gray-600 cursor-pointer hover:bg-gray-300 rounded text-sm text-center border-2 h-8 w-6 py-1 ${letter.color}`}
                         >
                             {letter.letter}
                         </div>
@@ -42,7 +42,7 @@ const Keyboard = (props) => {
                             id={letter.letter}
                             key={letter.id}
                             onClick={handleLetterClick}
-                            className={`dark:bg-slate-500  cursor-pointer hover:bg-gray-300 rounded text-sm text-center border-2 h-8 w-6 py-1  ${letter.color}`}
+                            className={` dark:border-gray-600 cursor-pointer hover:bg-gray-300 rounded text-sm text-center border-2 h-8 w-6 py-1  ${letter.color}`}
                         >
                             {letter.letter}
                         </div>

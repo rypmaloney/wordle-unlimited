@@ -5,8 +5,11 @@ import uniqid from "uniqid";
 import Modal from "./endModal";
 import Board from "./Board";
 import Nav from "./Nav";
+import StatsModal from "./StatsModal";
+import { tab } from "@testing-library/user-event/dist/tab";
 
 const list = require("../util/lists/processedWords.json");
+
 const shuffledList = shuffle(list);
 const initialGuessList = [
     {
@@ -16,11 +19,11 @@ const initialGuessList = [
         guessSplit: ["", "", "", "", ""],
         letterCheck: ["", "", "", "", ""],
         letterColor: [
-            "bg-slate-100",
-            "bg-slate-100",
-            "bg-slate-100",
-            "bg-slate-100",
-            "bg-slate-100",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
         ],
         id: uniqid(),
     },
@@ -31,11 +34,11 @@ const initialGuessList = [
         guessSplit: ["", "", "", "", ""],
         letterCheck: ["", "", "", "", ""],
         letterColor: [
-            "bg-slate-100",
-            "bg-slate-100",
-            "bg-slate-100",
-            "bg-slate-100",
-            "bg-slate-100",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
         ],
         id: uniqid(),
     },
@@ -46,11 +49,11 @@ const initialGuessList = [
         guessSplit: ["", "", "", "", ""],
         letterCheck: ["", "", "", "", ""],
         letterColor: [
-            "bg-slate-100",
-            "bg-slate-100",
-            "bg-slate-100",
-            "bg-slate-100",
-            "bg-slate-100",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
         ],
         id: uniqid(),
     },
@@ -61,11 +64,11 @@ const initialGuessList = [
         guessSplit: ["", "", "", "", ""],
         letterCheck: ["", "", "", "", ""],
         letterColor: [
-            "bg-slate-100",
-            "bg-slate-100",
-            "bg-slate-100",
-            "bg-slate-100",
-            "bg-slate-100",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
         ],
         id: uniqid(),
     },
@@ -76,11 +79,11 @@ const initialGuessList = [
         guessSplit: ["", "", "", "", ""],
         letterCheck: ["", "", "", "", ""],
         letterColor: [
-            "bg-slate-100",
-            "bg-slate-100",
-            "bg-slate-100",
-            "bg-slate-100",
-            "bg-slate-100",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
         ],
         id: uniqid(),
     },
@@ -91,144 +94,16 @@ const initialGuessList = [
         guessSplit: ["", "", "", "", ""],
         letterCheck: ["", "", "", "", ""],
         letterColor: [
-            "bg-slate-100",
-            "bg-slate-100",
-            "bg-slate-100",
-            "bg-slate-100",
-            "bg-slate-100",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
+            "bg-slate-100 dark:bg-gray-300 ",
         ],
         id: uniqid(),
     },
 ];
-
-const Game = () => {
-    const [darkEnabled, setDarkEnabled] = useState("light");
-    const [gameNumber, setGameNumber] = useState(() => {
-        const saved = localStorage.getItem("gameNumber");
-        const initialValue = JSON.parse(saved);
-        return initialValue || 0;
-    });
-
-    const [wordList, setWordList] = useState(() => {
-        const saved = localStorage.getItem("wordList");
-        const initialValue = JSON.parse(saved);
-        return initialValue || shuffledList;
-    });
-
-    const [word, setWord] = useState(() => {
-        const saved = localStorage.getItem("word");
-        const initialValue = JSON.parse(saved);
-        return initialValue || wordList[0];
-    });
-    // 0 === correct letter & locaiton
-    // 2 === correct letter, wrong location
-    // 3 === wrong letter, wrong location
-
-    const [guessIndex, setGuessIndex] = useState(() => {
-        const saved = localStorage.getItem("guessIndex");
-        const initialValue = JSON.parse(saved);
-        return initialValue || 0;
-    });
-
-    const [guesses, setGuesses] = useState(() => {
-        const saved = localStorage.getItem("guesses");
-        const initialValue = JSON.parse(saved);
-        return (
-            initialValue || [
-                {
-                    guessMade: false,
-                    isWord: true,
-                    guess: "",
-                    guessSplit: ["", "", "", "", ""],
-                    letterCheck: ["", "", "", "", ""],
-                    letterColor: [
-                        "bg-slate-100",
-                        "bg-slate-100",
-                        "bg-slate-100",
-                        "bg-slate-100",
-                        "bg-slate-100",
-                    ],
-                    id: uniqid(),
-                },
-                {
-                    guessMade: false,
-                    isWord: true,
-                    guess: "",
-                    guessSplit: ["", "", "", "", ""],
-                    letterCheck: ["", "", "", "", ""],
-                    letterColor: [
-                        "bg-slate-100",
-                        "bg-slate-100",
-                        "bg-slate-100",
-                        "bg-slate-100",
-                        "bg-slate-100",
-                    ],
-                    id: uniqid(),
-                },
-                {
-                    guessMade: false,
-                    isWord: true,
-                    guess: "",
-                    guessSplit: ["", "", "", "", ""],
-                    letterCheck: ["", "", "", "", ""],
-                    letterColor: [
-                        "bg-slate-100",
-                        "bg-slate-100",
-                        "bg-slate-100",
-                        "bg-slate-100",
-                        "bg-slate-100",
-                    ],
-                    id: uniqid(),
-                },
-                {
-                    guessMade: false,
-                    isWord: true,
-                    guess: "",
-                    guessSplit: ["", "", "", "", ""],
-                    letterCheck: ["", "", "", "", ""],
-                    letterColor: [
-                        "bg-slate-100",
-                        "bg-slate-100",
-                        "bg-slate-100",
-                        "bg-slate-100",
-                        "bg-slate-100",
-                    ],
-                    id: uniqid(),
-                },
-                {
-                    guessMade: false,
-                    isWord: true,
-                    guess: "",
-                    guessSplit: ["", "", "", "", ""],
-                    letterCheck: ["", "", "", "", ""],
-                    letterColor: [
-                        "bg-slate-100",
-                        "bg-slate-100",
-                        "bg-slate-100",
-                        "bg-slate-100",
-                        "bg-slate-100",
-                    ],
-                    id: uniqid(),
-                },
-                {
-                    guessMade: false,
-                    isWord: true,
-                    guess: "",
-                    guessSplit: ["", "", "", "", ""],
-                    letterCheck: ["", "", "", "", ""],
-                    letterColor: [
-                        "bg-slate-100",
-                        "bg-slate-100",
-                        "bg-slate-100",
-                        "bg-slate-100",
-                        "bg-slate-100",
-                    ],
-                    id: uniqid(),
-                },
-            ]
-        );
-    });
-    const [letters, setLetters] = useState([
+const initialLetters = [
         {
             letter: "Q",
             color: "bg-slate-100",
@@ -361,7 +236,60 @@ const Game = () => {
             color: "bg-slate-100",
             id: uniqid(),
         },
-    ]);
+    ]
+    const initialStats = {
+        wins: 0,
+        gamesPlayed: 0,
+        guessOneWins: 0,
+        guessTwoWins: 0,
+        guessThreeWins: 2,
+        guessFourWins: 0,
+        guessFiveWins: 0,
+        guessSixWins: 4,
+    }
+
+
+const Game = () => {
+    const [darkEnabled, setDarkEnabled] = useState("light");
+    const [gameNumber, setGameNumber] = useState(() => {
+        const saved = localStorage.getItem("gameNumber");
+        const initialValue = JSON.parse(saved);
+        return initialValue || 0;
+    });
+
+    const [wordList, setWordList] = useState(() => {
+        const saved = localStorage.getItem("wordList");
+        const initialValue = JSON.parse(saved);
+        return initialValue || shuffledList;
+    });
+
+    const [word, setWord] = useState(() => {
+        const saved = localStorage.getItem("word");
+        const initialValue = JSON.parse(saved);
+        return initialValue || wordList[0];
+    });
+    // 0 === correct letter & locaiton
+    // 2 === correct letter, wrong location
+    // 3 === wrong letter, wrong location
+
+    const [guessIndex, setGuessIndex] = useState(() => {
+        const saved = localStorage.getItem("guessIndex");
+        const initialValue = JSON.parse(saved);
+        return initialValue || 0;
+    });
+
+    const [guesses, setGuesses] = useState(() => {
+        const saved = localStorage.getItem("guesses");
+        const initialValue = JSON.parse(saved);
+        return initialValue || initialGuessList.slice();
+    });
+    const [letters, setLetters] = useState(()=>{
+        const saved = localStorage.getItem("letters");
+        const initialValue = JSON.parse(saved);
+        return initialValue || initialLetters.slice()
+    } );
+
+
     const [gameHistory, setGameHistory] = useState([
         {
             word: word,
@@ -370,6 +298,12 @@ const Game = () => {
             id: uniqid(),
         },
     ]);
+    const [stats, setStats] = useState(() => {
+        const saved = localStorage.getItem("stats");
+        const initialValue = JSON.parse(saved);
+        return initialValue || initialStats.slice()
+
+    });
     const [gameResult, setGameResult] = useState("lost");
 
     const [inputValue, setInputValue] = useState("");
@@ -377,19 +311,9 @@ const Game = () => {
 
     //modals
     const [endModalIsOpen, setEndModalIsOpen] = useState(false);
+    const [statsModalIsOpen, setStatsModalIsOpen] = useState(false);
 
     const newGame = () => {
-        //Commits the previous game to state
-        let previousGame = {
-            gameNumber: gameNumber,
-            word: word,
-            didWin: gameResult,
-            guesses: guessIndex,
-        };
-        let historyCopy = gameHistory;
-        historyCopy.push(previousGame);
-        setGameHistory(historyCopy);
-
         let newGameNum = gameNumber + 1;
         //makes a new game
         setGameNumber(newGameNum);
@@ -404,11 +328,11 @@ const Game = () => {
                 guessSplit: ["", "", "", "", ""],
                 letterCheck: ["", "", "", "", ""],
                 letterColor: [
-                    "bg-slate-100",
-                    "bg-slate-100",
-                    "bg-slate-100",
-                    "bg-slate-100",
-                    "bg-slate-100",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
                 ],
                 id: uniqid(),
             },
@@ -419,11 +343,11 @@ const Game = () => {
                 guessSplit: ["", "", "", "", ""],
                 letterCheck: ["", "", "", "", ""],
                 letterColor: [
-                    "bg-slate-100",
-                    "bg-slate-100",
-                    "bg-slate-100",
-                    "bg-slate-100",
-                    "bg-slate-100",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
                 ],
                 id: uniqid(),
             },
@@ -434,11 +358,11 @@ const Game = () => {
                 guessSplit: ["", "", "", "", ""],
                 letterCheck: ["", "", "", "", ""],
                 letterColor: [
-                    "bg-slate-100",
-                    "bg-slate-100",
-                    "bg-slate-100",
-                    "bg-slate-100",
-                    "bg-slate-100",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
                 ],
                 id: uniqid(),
             },
@@ -449,11 +373,11 @@ const Game = () => {
                 guessSplit: ["", "", "", "", ""],
                 letterCheck: ["", "", "", "", ""],
                 letterColor: [
-                    "bg-slate-100",
-                    "bg-slate-100",
-                    "bg-slate-100",
-                    "bg-slate-100",
-                    "bg-slate-100",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
                 ],
                 id: uniqid(),
             },
@@ -464,11 +388,11 @@ const Game = () => {
                 guessSplit: ["", "", "", "", ""],
                 letterCheck: ["", "", "", "", ""],
                 letterColor: [
-                    "bg-slate-100",
-                    "bg-slate-100",
-                    "bg-slate-100",
-                    "bg-slate-100",
-                    "bg-slate-100",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
                 ],
                 id: uniqid(),
             },
@@ -479,16 +403,15 @@ const Game = () => {
                 guessSplit: ["", "", "", "", ""],
                 letterCheck: ["", "", "", "", ""],
                 letterColor: [
-                    "bg-slate-100",
-                    "bg-slate-100",
-                    "bg-slate-100",
-                    "bg-slate-100",
-                    "bg-slate-100",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
+                    "bg-slate-100 dark:bg-gray-300 ",
                 ],
                 id: uniqid(),
             },
         ]);
-
         setLetters([
             {
                 letter: "Q",
@@ -540,7 +463,7 @@ const Game = () => {
                 color: "bg-slate-100",
                 id: uniqid(),
             },
-
+    
             {
                 letter: "A",
                 color: "bg-slate-100",
@@ -586,7 +509,7 @@ const Game = () => {
                 color: "bg-slate-100",
                 id: uniqid(),
             },
-
+    
             {
                 letter: "Z",
                 color: "bg-slate-100",
@@ -623,7 +546,62 @@ const Game = () => {
                 id: uniqid(),
             },
         ]);
+
     };
+
+    const tabulateStats = () => {
+                
+        
+                //Commits the previous game to state
+                let previousGame = {
+                    gameNumber: gameNumber,
+                    word: word,
+                    didWin: gameResult,
+                    guesses: guessIndex,
+                };
+        
+                let historyCopy = gameHistory;
+                historyCopy.push(previousGame);
+                setGameHistory(historyCopy);
+        
+        
+        //Make Stats
+
+                let statsCopy = Object.assign({}, stats);
+                statsCopy.gamesPlayed +=1;
+                if(gameResult==="won"){
+                    statsCopy.wins +=1
+                }
+                console.log("endgame" + guessIndex)
+
+                let winRound = guessIndex 
+       
+                switch (winRound) {
+                    case  0:
+                        statsCopy.guessOneWins += 1;
+                        break;
+                   case 1:
+                       console.log("second guess")
+                       statsCopy.guessTwoWins += 1;
+                        break;
+                    case 2:
+                        statsCopy.guessThreeWins += 1;
+                       break;
+                    case  3:
+                       statsCopy.guessFourWins += 1;
+                        break;
+                     case 4:
+                        statsCopy.guessFiveWins += 1;
+                        break;
+                    case  5:
+                        statsCopy.guessSixWins += 1;
+                        break;
+                    default:
+                        console.log("stats is broken");
+                }
+                setStats(statsCopy)
+                console.log(stats)
+    }
 
     const handleGuessChange = (e) => {
         setWarning("");
@@ -645,8 +623,7 @@ const Game = () => {
         e.preventDefault();
 
         let guessesCopy = guesses.slice();
-        console.log(guessesCopy[guessIndex].guess.length);
-        console.log(guessesCopy[guessIndex].guess);
+
         if (guessesCopy[guessIndex].guess.length === 5) {
             checkWordle(guessesCopy[guessIndex].guess);
         }
@@ -678,7 +655,8 @@ const Game = () => {
             setTimeout(function timer() {
                 if (guessSplit[i] === wordSplit[i]) {
                     guessesCopy[index].letterCheck[i] = 0;
-                    guessesCopy[index].letterColor[i] = "bg-lime-500";
+                    guessesCopy[index].letterColor[i] =
+                        "bg-lime-500 dark:bg-lime-500";
                     updateKeyboard(guessSplit[i], 0);
                 }
                 for (let j = 0; j < wordSplit.length; j++) {
@@ -687,7 +665,8 @@ const Game = () => {
                         guessSplit[i] !== wordSplit[i]
                     ) {
                         guessesCopy[index].letterCheck[i] = 1;
-                        guessesCopy[index].letterColor[i] = "bg-yellow-500";
+                        guessesCopy[index].letterColor[i] =
+                            "bg-yellow-500 dark:bg-yellow-500";
 
                         updateKeyboard(guessSplit[i], 1);
                     } else if (
@@ -701,6 +680,8 @@ const Game = () => {
                 }
             }, i * 300);
             setGuesses(guessesCopy);
+
+        
         }
     };
 
@@ -737,11 +718,11 @@ const Game = () => {
         let submittedGuess = guesses[guessIndex].guessSplit;
 
         if (isEqual(submittedGuess, word.word.split(""))) {
-            console.log("win");
             setTimeout(() => {
                 setEndModalIsOpen(true);
             }, 1500);
             setGameResult("won");
+            tabulateStats()
         } else if (
             !isEqual(submittedGuess, word.word.split("")) &&
             guessIndex === 5
@@ -750,6 +731,7 @@ const Game = () => {
                 setEndModalIsOpen(true);
             }, 1500);
             setGameResult("lost");
+            tabulateStats()
         }
     };
 
@@ -757,7 +739,7 @@ const Game = () => {
         if (inputValue.length < 5) {
             let call = inputValue + e.target.id;
             setInputValue(call);
-            console.log(inputValue);
+
 
             let guessesCopy = guesses.slice();
 
@@ -773,26 +755,32 @@ const Game = () => {
         }
     };
 
-    function switchToDark(darkEnabled) {}
-
     useEffect(() => {
+        localStorage.setItem("letters", JSON.stringify(letters));
+        localStorage.setItem("stats", JSON.stringify(stats));
         localStorage.setItem("guesses", JSON.stringify(guesses));
         localStorage.setItem("wordList", JSON.stringify(wordList));
         localStorage.setItem("word", JSON.stringify(word));
         localStorage.setItem("gameNumber", JSON.stringify(gameNumber));
         localStorage.setItem("guessIndex", JSON.stringify(guessIndex));
-    }, [guesses, wordList, word, gameNumber, guessIndex]);
+    }, [guesses, wordList, word, gameNumber, guessIndex, stats, letters]);
 
     return (
         <div className={darkEnabled}>
-            <div className={`h-screen bg-gray-50  dark:bg-gray-800`}>
+
+            <div className={` bg-gray-50  dark:bg-gray-800 pb-10`}>
                 <Nav
                     darkEnabled={darkEnabled}
                     setDarkEnabled={setDarkEnabled}
+                    newGame={newGame}
+                    setStatsModalIsOpen={setStatsModalIsOpen}
                 />
+                
                 <div className="max-w-md min-w-md mx-auto">
                     <h1 className="text-3xl font-bold text-slate-600 dark:text-slate-200 text-center mx-auto p-3">
-                        Wordle Unlimited
+                        W<span className="text-yellow-500">o</span>rd
+                        <span className="text-lime-500">l</span>e Unli
+                        <span className="text-yellow-500">m</span>ited
                     </h1>
 
                     <Board
@@ -811,6 +799,11 @@ const Game = () => {
                     word={word}
                     gameResult={gameResult}
                     newGame={newGame}
+                />
+                <StatsModal 
+                    setIsOpen={setStatsModalIsOpen}
+                    isOpen={statsModalIsOpen}
+                    stats={stats}
                 />
             </div>
         </div>
