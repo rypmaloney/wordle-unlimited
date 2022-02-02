@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import isEqual from "lodash/isEqual";
 import shuffle from "lodash/shuffle";
+import { cloneDeep } from "lodash";
 import uniqid from "uniqid";
 import Modal from "./endModal";
 import Board from "./Board";
 import Nav from "./Nav";
 import StatsModal from "./StatsModal";
-
 
 const list = require("../util/lists/processedWords.json");
 
@@ -58,20 +58,17 @@ const generateInitialLettersList = (wordLength) => {
         "N",
         "M",
     ];
-    let list = []
+    let list = [];
 
-    keyboardArray.forEach((letter)=>{
-        list.push(
-            {
-                letter: letter,
-                color: "bg-slate-100",
-                id: uniqid(),
-            }
-        )
-    })
-    return list
+    keyboardArray.forEach((letter) => {
+        list.push({
+            letter: letter,
+            color: "bg-slate-100",
+            id: uniqid(),
+        });
+    });
+    return list;
 };
-
 
 const Game = () => {
     const [darkEnabled, setDarkEnabled] = useState("light");
@@ -134,6 +131,7 @@ const Game = () => {
                 guessFourWins: 0,
                 guessFiveWins: 0,
                 guessSixWins: 0,
+                loss: 0,
             }
         );
     });
@@ -157,7 +155,7 @@ const Game = () => {
         setLetters(() => generateInitialLettersList());
     };
 
-    const tabulateStats = () => {
+    const tabulateStats = (result) => {
         //Commits the previous game to state
         let previousGame = {
             gameNumber: gameNumber,
@@ -174,34 +172,36 @@ const Game = () => {
 
         let statsCopy = Object.assign({}, stats);
         statsCopy.gamesPlayed += 1;
-        if (gameResult === "won") {
-            statsCopy.wins += 1;
+        statsCopy.wins += result;
+
+        if (result === 1) {
+            switch (guessIndex) {
+                case 0:
+                    statsCopy.guessOneWins += 1;
+                    break;
+                case 1:
+                    statsCopy.guessTwoWins += 1;
+                    break;
+                case 2:
+                    statsCopy.guessThreeWins += 1;
+                    break;
+                case 3:
+                    statsCopy.guessFourWins += 1;
+                    break;
+                case 4:
+                    statsCopy.guessFiveWins += 1;
+                    break;
+                case 5:
+                    statsCopy.guessSixWins += 1;
+                    break;
+
+                default:
+                    console.log("stats is broken");
+            }
+        } else {
+            statsCopy.loss += 1;
         }
 
-        let winRound = guessIndex;
-
-        switch (winRound) {
-            case 0:
-                statsCopy.guessOneWins += 1;
-                break;
-            case 1:
-                statsCopy.guessTwoWins += 1;
-                break;
-            case 2:
-                statsCopy.guessThreeWins += 1;
-                break;
-            case 3:
-                statsCopy.guessFourWins += 1;
-                break;
-            case 4:
-                statsCopy.guessFiveWins += 1;
-                break;
-            case 5:
-                statsCopy.guessSixWins += 1;
-                break;
-            default:
-                console.log("stats is broken");
-        }
         setStats(statsCopy);
     };
 
@@ -223,20 +223,18 @@ const Game = () => {
 
     const handleSubmitGuess = (e) => {
         e.preventDefault();
-
-        let guessesCopy = guesses.slice();
-
-        if (guessesCopy[guessIndex].guess.length === 5) {
-            checkWordle(guessesCopy[guessIndex].guess);
+        //cloneDeep to keep me honest
+        let newGuess = cloneDeep(guesses[guessIndex].guess)
+        if (newGuess.length === 5) {
+            checkWordle(newGuess, guessIndex);
         }
     };
 
     const updateKeyboard = (letter, checkResult) => {
-        let lettersCopy = letters.slice();
+        let lettersCopy = cloneDeep(letters)
         let letterIndex = lettersCopy.findIndex(
             (x) => x.letter === letter.toUpperCase()
         );
-
         if (checkResult === 0) {
             lettersCopy[letterIndex].color = "bg-lime-500";
         } else if (checkResult === 1) {
@@ -244,67 +242,85 @@ const Game = () => {
         } else {
             lettersCopy[letterIndex].color = "bg-slate-500";
         }
-
         setLetters(lettersCopy);
     };
 
-    const checkLetters = (index) => {
-        let guessesCopy = guesses.slice();
-        let guessSplit = guessesCopy[index].guessSplit;
-        let wordSplit = word.word.split("");
 
+    const checkLetters = (guess, index) => {
+        const guessSplit = guess.split("");
+        const wordSplit = word.word.split("");
+        //measure guess against this. Remove greens so you don't get duplicate yellow/green combinations
+        let wordTracker = cloneDeep(wordSplit);
+        //push colors for board to this. Does not mutate state directly
+        let guessColor = ["", "", "", "", ""];
+        //check for green
+        for (let i = 0; i < 5; i++) {
+            if (guessSplit[i] === wordSplit[i]) {
+                guessColor[i] = "bg-lime-500 dark:bg-lime-500";
+                updateKeyboard(guessSplit[i], 0);
+                wordTracker[i] = 0;
+            }
+        }
+        for (let i = 0; i < 5; i++) {
+            for (let j = 0; j < 5; j++) {
+                if (
+                    guessSplit[i] === wordTracker[j] &&
+                    guessSplit[i] !== wordSplit[i]
+                ) {
+                    guessColor[i] = "bg-yellow-500 dark:bg-yellow-500";
+                    updateKeyboard(guessSplit[i], 1);
+                } else if (
+                    guessSplit[i] !== wordTracker[i] &&
+                    guessSplit[i] !== wordTracker[j] &&
+                    guessColor[i] === ""
+                ) {
+                    guessColor[i] = "bg-slate-500";
+                    updateKeyboard(guessSplit[i], 3);
+                }
+            }
+        }
+        //update each letter one at a time
         for (let i = 0; i < 5; i++) {
             setTimeout(function timer() {
-                if (guessSplit[i] === wordSplit[i]) {
-                    guessesCopy[index].letterCheck[i] = 0;
-                    guessesCopy[index].letterColor[i] =
-                        "bg-lime-500 dark:bg-lime-500";
-                    updateKeyboard(guessSplit[i], 0);
-                }
-                for (let j = 0; j < wordSplit.length; j++) {
-                    if (
-                        guessSplit[i] === wordSplit[j] &&
-                        guessSplit[i] !== wordSplit[i]
-                    ) {
-                        guessesCopy[index].letterCheck[i] = 1;
-                        guessesCopy[index].letterColor[i] =
-                            "bg-yellow-500 dark:bg-yellow-500";
-
-                        updateKeyboard(guessSplit[i], 1);
-                    } else if (
-                        guessSplit[i] !== wordSplit[i] &&
-                        guessSplit[i] !== wordSplit[j] &&
-                        guessesCopy[index].letterCheck[i] === ""
-                    ) {
-                        guessesCopy[index].letterColor[i] = "bg-slate-500";
-                        updateKeyboard(guessSplit[i], 3);
-                    }
-                }
-            }, i * 300);
-            setGuesses(guessesCopy);
+            setGuesses((prevState) => {
+                const guessObjects = Array.from(prevState);
+                guessObjects[index].letterColor[i] = guessColor[i];
+                return guessObjects;
+            });
+        }, i * 300);
         }
+        console.log(guesses);
     };
 
-    async function checkWordle(word) {
+
+    async function checkWordle(guess, index) {
         let guessesCopy = guesses.slice();
-        const key = "ed92f719-9976-426c-a34f-1fb9d6ceb547";
         const res = await fetch(
-            `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${key}`
+            `https://wordsapiv1.p.rapidapi.com/words/${guess}/definitions`,
+            {
+                method: "get",
+                headers: {
+                    Accept: "application/json",
+                    "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
+                    "x-rapidapi-key":
+                        "220d5b54e7mshbfb806407f2aa7fp1432d4jsnc5157c15dc6c",
+                },
+            }
         );
         const response = await res.json();
 
         //Update either input or warning depending on if it is a word
-        if (response[0].meta !== undefined) {
-            guessesCopy[guessIndex].isWord = true;
-            guessesCopy[guessIndex].guessMade = true;
+        if (response.success !== false) {
+            guessesCopy[index].isWord = true;
+            guessesCopy[index].guessMade = true;
             if (guessIndex < 5) {
-                let guessIndexCopy = guessIndex + 1;
-                setGuessIndex(guessIndexCopy);
+                let nextGuessIndex = guessIndex + 1;
+                setGuessIndex(nextGuessIndex);
             }
 
             setInputValue("");
             // setWarning(response[0].shortdef[0]);
-            checkLetters(guessIndex);
+            checkLetters(guess, index);
             checkIfWon();
         } else {
             guessesCopy[guessIndex].isWord = false;
@@ -322,7 +338,7 @@ const Game = () => {
                 setEndModalIsOpen(true);
             }, 1500);
             setGameResult("won");
-            tabulateStats();
+            tabulateStats(1);
         } else if (
             !isEqual(submittedGuess, word.word.split("")) &&
             guessIndex === 5
@@ -330,8 +346,9 @@ const Game = () => {
             setTimeout(() => {
                 setEndModalIsOpen(true);
             }, 1500);
+
             setGameResult("lost");
-            tabulateStats();
+            tabulateStats(0);
         }
     };
 
@@ -374,14 +391,15 @@ const Game = () => {
     };
 
     useEffect(() => {
-        localStorage.setItem("letters", JSON.stringify(letters));
-        localStorage.setItem("stats", JSON.stringify(stats));
-        localStorage.setItem("guesses", JSON.stringify(guesses));
-        localStorage.setItem("wordList", JSON.stringify(wordList));
-        localStorage.setItem("word", JSON.stringify(word));
-        localStorage.setItem("gameNumber", JSON.stringify(gameNumber));
-        localStorage.setItem("guessIndex", JSON.stringify(guessIndex));
-    }, [guesses, wordList, word, gameNumber, guessIndex, stats, letters]);
+        // localStorage.setItem("letters", JSON.stringify(letters));
+        // localStorage.setItem("stats", JSON.stringify(stats));
+        // localStorage.setItem("guesses", JSON.stringify(guesses));
+        // localStorage.setItem("wordList", JSON.stringify(wordList));
+        // localStorage.setItem("word", JSON.stringify(word));
+        // localStorage.setItem("gameNumber", JSON.stringify(gameNumber));
+        // localStorage.setItem("guessIndex", JSON.stringify(guessIndex));
+        //guesses, wordList, word, gameNumber, guessIndex, stats, letters
+    }, []);
 
     return (
         <div className={darkEnabled}>

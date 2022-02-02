@@ -1,5 +1,5 @@
 const Keyboard = (props) => {
-    const { letters, handleLetterClick, handleSubmitGuess, handleDeleteLetter={handleDeleteLetter} } = props;
+    const { letters, handleLetterClick } = props;
 
     let keyRowOne = letters.slice(0, 10);
     let keyRowTwo = letters.slice(10, 19);

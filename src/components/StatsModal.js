@@ -2,6 +2,11 @@ import { Dialog } from "@headlessui/react";
 
 const StatsModal = ({ isOpen, setIsOpen, stats }) => {
 
+    function percentWin(roundWins){
+        return Math.round(roundWins/stats.gamesPlayed * 100)
+    }
+
+
     return (
         <Dialog
             open={isOpen}
@@ -16,14 +21,15 @@ const StatsModal = ({ isOpen, setIsOpen, stats }) => {
                     </Dialog.Title>
 
                     <p className="text-sm mt-4"><strong>Games Played: </strong> {stats.gamesPlayed}</p>
-                    <p className="text-sm"><strong>Wins: </strong> {stats.wins} ({Math.round(stats.wins/stats.gamesPlayed * 100)}%)</p>
+                    <p className="text-sm"><strong>Wins: </strong> {stats.wins} ( {percentWin(stats.wins) ? percentWin(stats.wins) : 0 }) %</p>
                     <p className="text-lg mt-4 bolder">Win Distribution:</p>
-                    <p className="text-sm"><strong>Guess 1:</strong>  {Math.round(stats.guessOneWins/stats.gamesPlayed * 100)}%</p>
-                    <p className="text-sm"><strong>Guess 2:</strong>    {Math.round(stats.guessTwoWins/stats.gamesPlayed * 100)}%</p>
-                    <p className="text-sm"><strong>Guess 3:</strong>    {Math.round(stats.guessThreeWins/stats.gamesPlayed * 100)}%</p>
-                    <p className="text-sm"> <strong>Guess 4:</strong>    {Math.round(stats.guessFourWins/stats.gamesPlayed * 100)}%</p>
-                    <p className="text-sm"> <strong>Guess 5:</strong>    {Math.round(stats.guessFiveWins/stats.gamesPlayed * 100)}%</p>
-                    <p className="text-sm"><strong>Guess 6:</strong>   {Math.round(stats.guessSixWins/stats.gamesPlayed * 100)}%</p>
+                    <p className="text-sm"><strong>Guess 1:</strong>  {percentWin(stats.guessOneWins) ? percentWin(stats.guessOneWins): 0}%</p>
+                    <p className="text-sm"><strong>Guess 2:</strong>    {percentWin(stats.guessTwoWins) ? percentWin(stats.guessTwoWins): 0}%</p>
+                    <p className="text-sm"><strong>Guess 3:</strong>    {percentWin(stats.guessThreeWins) ? percentWin(stats.guessThreeWins): 0}%</p>
+                    <p className="text-sm"> <strong>Guess 4:</strong>    {percentWin(stats.guessFourWins) ? percentWin(stats.guessFourWins): 0}%</p>
+                    <p className="text-sm"> <strong>Guess 5:</strong>    {percentWin(stats.guessFiveWins) ? percentWin(stats.guessFiveWins): 0}%</p>
+                    <p className="text-sm"><strong>Guess 6:</strong>   {percentWin(stats.guessSixWins) ? percentWin(stats.guessSixWins): 0}%</p>
+                    <p className="text-sm"><strong>Loss:</strong>   {percentWin(stats.loss) ? percentWin(stats.loss): 0}%</p>
                     <button
                         className="border-black border-solid border text-lg rounded mx-1 mt-4 py-1 px-2"
                         onClick={() => {
