@@ -7,8 +7,8 @@ function ModeToggle(props) {
 
   return (
     <Switch.Group>
-      <div className="flex items-center">
-        <Switch.Label className="mr-4 text-white text-sm"> {darkEnabled} mode</Switch.Label>
+      <div className="flex items-center mr-2 h-8">
+        <Switch.Label className=" mt-1 mr-1 text-white text-sm"> {darkEnabled} mode</Switch.Label>
         <Switch
           checked={darkEnabled}
           onChange={()=>{

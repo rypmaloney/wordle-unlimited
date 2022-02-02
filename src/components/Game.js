@@ -136,7 +136,6 @@ const Game = () => {
         );
     });
     const [gameResult, setGameResult] = useState("lost");
-
     const [inputValue, setInputValue] = useState("");
     const [warning, setWarning] = useState("");
 
@@ -169,11 +168,10 @@ const Game = () => {
         setGameHistory(historyCopy);
 
         //Make Stats
-
+        //check this
         let statsCopy = Object.assign({}, stats);
         statsCopy.gamesPlayed += 1;
         statsCopy.wins += result;
-
         if (result === 1) {
             switch (guessIndex) {
                 case 0:
@@ -201,50 +199,71 @@ const Game = () => {
         } else {
             statsCopy.loss += 1;
         }
-
         setStats(statsCopy);
     };
 
     const handleGuessChange = (e) => {
         setWarning("");
         setInputValue(e.target.value.toUpperCase());
-        let guessesCopy = guesses.slice();
+        let deepGuessesCopy = cloneDeep(guesses)
 
-        if (guessesCopy[guessIndex].guess.length <= 5) {
-            guessesCopy[guessIndex].guess = e.target.value.toLowerCase();
+        if (deepGuessesCopy[guessIndex].guess.length < 6) {
+            //updates the guess
+            deepGuessesCopy[guessIndex].guess = e.target.value.toLowerCase();
+            setGuesses((prevState) => {
+                const guessObjects = Array.from(prevState);
+                guessObjects[guessIndex].guess =  deepGuessesCopy[guessIndex].guess
+                return guessObjects;
+            });
+            //holds the new split word
+            let newGuessSplit = Array(5)
             for (let i = 0; i <= 4; i++) {
-                guessesCopy[guessIndex].guessSplit[i] = guessesCopy[
-                    guessIndex
-                ].guess.slice(i, i + 1);
+                newGuessSplit[i] = deepGuessesCopy[guessIndex].guess.slice(i, i + 1);
             }
+            setGuesses((prevState) => {
+                const guessObjects = Array.from(prevState);
+                guessObjects[guessIndex].guessSplit =  newGuessSplit
+                return guessObjects;
+            });
         }
-        setGuesses(guessesCopy);
     };
 
     const handleSubmitGuess = (e) => {
         e.preventDefault();
         //cloneDeep to keep me honest
-        let newGuess = cloneDeep(guesses[guessIndex].guess)
+        let newGuess = cloneDeep(guesses[guessIndex].guess);
         if (newGuess.length === 5) {
             checkWordle(newGuess, guessIndex);
         }
+
     };
 
     const updateKeyboard = (letter, checkResult) => {
-        let lettersCopy = cloneDeep(letters)
+        //cloneDeep to keep me honest
+        let lettersCopy = cloneDeep(letters);
+        //function to update an individual letter
+        const updateKey = (index, color) => {
+            setLetters((prevState) => {
+                const letterObject = Array.from(prevState);
+                letterObject[index].color = color;
+                return letterObject;
+            });
+        };
+        //find the letter in question
         let letterIndex = lettersCopy.findIndex(
             (x) => x.letter === letter.toUpperCase()
         );
-        if (checkResult === 0) {
-            lettersCopy[letterIndex].color = "bg-lime-500";
-        } else if (checkResult === 1) {
-            lettersCopy[letterIndex].color = "bg-yellow-500";
-        } else {
-            lettersCopy[letterIndex].color = "bg-slate-500";
-        }
-        setLetters(lettersCopy);
+        //setTimeout so it doesn't display until after the board updates
+        setTimeout(() => {
+            if (checkResult === 0) {
+                updateKey(letterIndex, "bg-lime-500");
+            } else if (checkResult === 1) {
+                updateKey(letterIndex, "bg-yellow-500");
+            } else {
+                updateKey(letterIndex, "bg-slate-500");
+            }
+        }, 1500);
     };
-
 
     const checkLetters = (guess, index) => {
         const guessSplit = guess.split("");
@@ -282,19 +301,16 @@ const Game = () => {
         //update each letter one at a time
         for (let i = 0; i < 5; i++) {
             setTimeout(function timer() {
-            setGuesses((prevState) => {
-                const guessObjects = Array.from(prevState);
-                guessObjects[index].letterColor[i] = guessColor[i];
-                return guessObjects;
-            });
-        }, i * 300);
+                setGuesses((prevState) => {
+                    const guessObjects = Array.from(prevState);
+                    guessObjects[index].letterColor[i] = guessColor[i];
+                    return guessObjects;
+                });
+            }, i * 300);
         }
-        console.log(guesses);
     };
 
-
     async function checkWordle(guess, index) {
-        let guessesCopy = guesses.slice();
         const res = await fetch(
             `https://wordsapiv1.p.rapidapi.com/words/${guess}/definitions`,
             {
@@ -307,27 +323,33 @@ const Game = () => {
                 },
             }
         );
+
         const response = await res.json();
 
         //Update either input or warning depending on if it is a word
         if (response.success !== false) {
-            guessesCopy[index].isWord = true;
-            guessesCopy[index].guessMade = true;
+            setGuesses((prevState) => {
+                let guessObjects = Array.from(prevState);
+                guessObjects[index].isWord = true;
+                guessObjects[index].guesMade = true;
+                return guessObjects;
+            });
             if (guessIndex < 5) {
                 let nextGuessIndex = guessIndex + 1;
                 setGuessIndex(nextGuessIndex);
             }
-
             setInputValue("");
             // setWarning(response[0].shortdef[0]);
             checkLetters(guess, index);
             checkIfWon();
         } else {
-            guessesCopy[guessIndex].isWord = false;
+            setGuesses((prevState) => {
+                let guessObjects = Array.from(prevState);
+                guessObjects[index].isWord = false;
+                return guessObjects;
+            });
             setWarning("I don't think that is a word...");
         }
-
-        setGuesses(guessesCopy);
     }
 
     const checkIfWon = () => {
@@ -346,19 +368,16 @@ const Game = () => {
             setTimeout(() => {
                 setEndModalIsOpen(true);
             }, 1500);
-
             setGameResult("lost");
             tabulateStats(0);
         }
     };
-
+//rewrite
     const handleLetterClick = (e) => {
         if (inputValue.length < 5) {
             let call = inputValue + e.target.id;
             setInputValue(call);
-
             let guessesCopy = guesses.slice();
-
             if (guessesCopy[guessIndex].guess.length <= 5) {
                 guessesCopy[guessIndex].guess = call.toLowerCase();
                 for (let i = 0; i < 5; i++) {
@@ -375,18 +394,18 @@ const Game = () => {
         if (inputValue.length > 0) {
             let call = inputValue.slice(0, -1);
             setInputValue(call);
-
-            let guessesCopy = guesses.slice();
-
+            let guessesCopy = cloneDeep(guesses)
             if (guessesCopy[guessIndex].guess.length <= 5) {
                 guessesCopy[guessIndex].guess = call.toLowerCase();
                 for (let i = 0; i < 5; i++) {
-                    guessesCopy[guessIndex].guessSplit[i] = guessesCopy[
-                        guessIndex
-                    ].guess.slice(i, i + 1);
+                    setGuesses((prevState) => {
+                        let guessObjects = Array.from(prevState);
+                        guessObjects[guessIndex].guessSplit[i]= guessesCopy[
+                            guessIndex].guess.slice(i, i + 1)
+                        return guessObjects;
+                    });
                 }
             }
-            setGuesses(guessesCopy);
         }
     };
 
@@ -403,7 +422,7 @@ const Game = () => {
 
     return (
         <div className={darkEnabled}>
-            <div className={` bg-gray-50  dark:bg-gray-800 pb-10`}>
+            <div className={`bg-gray-50  dark:bg-gray-800 pb-20`}>
                 <Nav
                     darkEnabled={darkEnabled}
                     setDarkEnabled={setDarkEnabled}
@@ -440,6 +459,8 @@ const Game = () => {
                     setIsOpen={setStatsModalIsOpen}
                     isOpen={statsModalIsOpen}
                     stats={stats}
+                    wordlistLength={wordList.length}
+                    gameNum={gameNumber}
                 />
             </div>
         </div>

@@ -1,6 +1,6 @@
 import { Dialog } from "@headlessui/react";
 
-const StatsModal = ({ isOpen, setIsOpen, stats }) => {
+const StatsModal = ({ isOpen, setIsOpen, stats, wordlistLength, gameNum }) => {
 
     function percentWin(roundWins){
         return Math.round(roundWins/stats.gamesPlayed * 100)
@@ -22,6 +22,8 @@ const StatsModal = ({ isOpen, setIsOpen, stats }) => {
 
                     <p className="text-sm mt-4"><strong>Games Played: </strong> {stats.gamesPlayed}</p>
                     <p className="text-sm"><strong>Wins: </strong> {stats.wins} ( {percentWin(stats.wins) ? percentWin(stats.wins) : 0 }) %</p>
+                    <p className="text-sm"><strong>Words Remaining: </strong> {wordlistLength - gameNum }</p>
+
                     <p className="text-lg mt-4 bolder">Win Distribution:</p>
                     <p className="text-sm"><strong>Guess 1:</strong>  {percentWin(stats.guessOneWins) ? percentWin(stats.guessOneWins): 0}%</p>
                     <p className="text-sm"><strong>Guess 2:</strong>    {percentWin(stats.guessTwoWins) ? percentWin(stats.guessTwoWins): 0}%</p>

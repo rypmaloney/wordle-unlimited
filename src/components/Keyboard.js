@@ -6,7 +6,7 @@ const Keyboard = (props) => {
     let keyRowThree = letters.slice(19, 27);
 
     return (
-        <div className="py-4 ">
+        <div className="py-4">
             <div className="grid grid-cols-10 gap-1 px-6 md:px-12">
                 {keyRowOne.map((letter) => {
                     return (
