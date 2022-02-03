@@ -423,8 +423,8 @@ const Game = () => {
     }, [guesses, wordList, word, gameNumber, guessIndex, stats, letters]);
 
     return (
-        <div className={darkEnabled}>
-            <div className={`bg-gray-50  dark:bg-gray-800 pb-20`}>
+        <div className= {`h-full ${darkEnabled}`}>
+            <div className={`bg-gray-50  dark:bg-gray-800 pb-20 min-h-full h-full`}>
                 <Nav
                     darkEnabled={darkEnabled}
                     setDarkEnabled={setDarkEnabled}
