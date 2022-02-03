@@ -423,8 +423,8 @@ const Game = () => {
     }, [guesses, wordList, word, gameNumber, guessIndex, stats, letters]);
 
     return (
-        <div className= {`h-full ${darkEnabled}`}>
-            <div className={`bg-gray-50  dark:bg-gray-800 pb-20 min-h-full h-full`}>
+        <div className= {`min-h-screen  ${darkEnabled}`}>
+            <div className={`bg-gray-50  dark:bg-gray-800 pb-20 min-h-screen `}>
                 <Nav
                     darkEnabled={darkEnabled}
                     setDarkEnabled={setDarkEnabled}
@@ -432,7 +432,7 @@ const Game = () => {
                     setStatsModalIsOpen={setStatsModalIsOpen}
                 />
 
-                <div className="max-w-md min-w-md mx-auto">
+                <div className="max-w-md min-w-md mx-auto flex flex-col justify-center min-h-screen">
                     <h1 className="text-3xl font-bold text-slate-600 dark:text-slate-200 text-center mx-auto p-3">
                         W<span className="text-yellow-500">o</span>rd
                         <span className="text-lime-500">l</span>e Unli
