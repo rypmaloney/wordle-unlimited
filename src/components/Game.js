@@ -375,6 +375,7 @@ const Game = () => {
 //rewrite
     const handleLetterClick = (e) => {
         if (inputValue.length < 5) {
+            setWarning("");
             let call = inputValue + e.target.id;
             setInputValue(call);
             let guessesCopy = guesses.slice();
@@ -392,6 +393,7 @@ const Game = () => {
 
     const handleDeleteLetter = () => {
         if (inputValue.length > 0) {
+            setWarning("");
             let call = inputValue.slice(0, -1);
             setInputValue(call);
             let guessesCopy = cloneDeep(guesses)

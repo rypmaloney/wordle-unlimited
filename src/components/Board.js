@@ -59,13 +59,13 @@ function Board(props) {
                 />
                 <button
                     onClick={handleDeleteLetter}
-                    className="hover:bg-gray-700 text-white py-1 m-1 px-4 rounded text-lg md:text-sm  focus:outline-none focus:shadow-outline float-left bg-red-700"
+                    className="md:hover:bg-gray-700 active:bg-gray-500 text-white py-1 m-1 px-4 rounded text-lg md:text-sm  focus:outline-none focus:shadow-outline float-left bg-red-700"
                 >
                     Delete
                 </button>
                 <button
                     onClick={handleSubmitGuess}
-                    className="hover:bg-gray-700 text-white py-1 m-1 px-4 text-lg md:text-sm rounded focus:outline-none focus:shadow-outline float-right bg-lime-700"
+                    className="md:hover:bg-gray-700 active:bg-gray-500 text-white py-1 m-1 px-4 text-lg md:text-sm rounded focus:outline-none focus:shadow-outline float-right bg-lime-700"
                 >
                     Submit
                 </button>
