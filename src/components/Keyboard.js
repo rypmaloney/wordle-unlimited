@@ -35,14 +35,14 @@ const Keyboard = (props) => {
                     );
                 })}
             </div>
-            <div className="flex justify-center  px-2 md:px-12 flex-row content-center">
+            <div className="flex justify-center  px-12 md:px-12 flex-row content-center">
                 {keyRowThree.map((letter) => {
                     return (
                         <div
                             id={letter.letter}
                             key={letter.id}
                             onClick={handleLetterClick}
-                            className={`cursor-pointer hover:bg-gray-300 rounded text-sm text-center border-2 dark:border-gray-600 h-9 w-8 py-1 mx-auto${letter.color}`}
+                            className={`cursor-pointer hover:bg-gray-300 rounded text-sm text-center border-2 dark:border-gray-600 h-9 w-8 py-1 mx-auto ${letter.color}`}
                         >
                             {letter.letter}
                         </div>
