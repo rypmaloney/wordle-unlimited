@@ -15,7 +15,7 @@ const Modal = ({ isOpen, setIsOpen, gameResult, word, newGame }) => {
                         You {gameResult}!
                     </Dialog.Title>
                     <Dialog.Description className="text-sm mt-2">
-                        The word was <em>{word.word.toUpperCase()}</em>.<br />g
+                        The word was <em>{word.word.toUpperCase()}</em>.<br />
                     </Dialog.Description>
                    <p className="text-sm mt-2">{word.definitions[0].definition}</p> 
                     <button
