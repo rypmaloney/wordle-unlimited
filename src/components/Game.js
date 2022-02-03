@@ -22,7 +22,7 @@ const generateInitialGuessList = (wordLength) => {
             guessSplit: Array(wordLength).fill(""),
             letterCheck: Array(wordLength).fill(""),
             letterColor: Array(wordLength).fill(
-                "bg-slate-100 dark:bg-gray-300 "
+                "bg-slate-100 dark:bg-gray-800 "
             ),
             id: uniqid(),
         });

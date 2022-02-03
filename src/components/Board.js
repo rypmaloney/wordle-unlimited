@@ -42,7 +42,7 @@ function Board(props) {
                         <input
                             inputMode='none'
                             onChange={handleGuessChange}
-                            className="form-control border border-solid border-slate-600 text-slate-700 dark:bg-gray-200 text-lg text-center rounded-ms h-10 w-4/5 mx-auto"
+                            className="form-control border border-solid border-slate-600 text-slate-700 dark:bg-gray-200 text-lg text-center dark:text-slate-50 rounded-ms h-10 w-4/5 mx-auto"
                             type="text"
                             placeholder="type your guess"
                             maxLength={5}
@@ -57,18 +57,8 @@ function Board(props) {
                     handleLetterClick={handleLetterClick}
                     handleSubmitGuess={handleSubmitGuess}
                 />
-                <button
-                    onClick={handleDeleteLetter}
-                    className="md:hover:bg-gray-700 active:bg-gray-500 text-white py-1 m-1 px-4 rounded text-lg md:text-sm  focus:outline-none focus:shadow-outline float-left bg-red-700"
-                >
-                    Delete
-                </button>
-                <button
-                    onClick={handleSubmitGuess}
-                    className="md:hover:bg-gray-700 active:bg-gray-500 text-white py-1 m-1 px-4 text-lg md:text-sm rounded focus:outline-none focus:shadow-outline float-right bg-lime-700"
-                >
-                    Submit
-                </button>
+
+
             </div>
         </div>
     );

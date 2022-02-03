@@ -8,8 +8,8 @@ const Guess = (props) => {
                 return (
                     <div
                         key={index}
-                        className={`box-border h-14 w-14 border-2 flex flex-col justify-center items-center ${letterColor[index]}`}>
-                        <p className="text-slate-600 text-4xl uppercase">
+                        className={`box-border h-14 w-14 border-2 flex flex-col justify-center dark:border-gray-400 items-center ${letterColor[index]}`}>
+                        <p className="text-slate-600 text-4xl dark:text-slate-50 uppercase">
                             {letter}
                         </p>
                     </div>
