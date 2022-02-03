@@ -12,7 +12,7 @@ function Board(props) {
         warning,
         letters,
         handleLetterClick,
-        handleDeleteLetter
+        handleDeleteLetter,
     } = props;
 
     return (
@@ -28,11 +28,12 @@ function Board(props) {
                     );
                 })}
 
-                <p className="text-sm pt-2 mb-0 ml-10 h-2 text-red-500">{warning}</p>
+                <p className="text-sm pt-2 mb-0 ml-10 h-2 text-red-500">
+                    {warning}
+                </p>
 
                 <form
                     onSubmit={handleSubmitGuess}
-    
                     className="form-inline mt-6 "
                 >
                     <div className="flex justify-center ">
@@ -46,23 +47,25 @@ function Board(props) {
                             autoFocus
                         />
                     </div>
-
                 </form>
                 <Keyboard
-                        handleDeleteLetter={handleDeleteLetter}
-                        letters={letters}
-                        handleLetterClick={handleLetterClick}
-                        handleSubmitGuess={handleSubmitGuess}
-                    />
-                <button onClick={handleDeleteLetter} className="hover:bg-gray-700 text-white font-bold py-1 my-1 px-4 w rounded text-xs focus:outline-none focus:shadow-outline float-left bg-red-700">
-                Delete
-            </button>
-            <button
-                onClick={handleSubmitGuess}
-                className="hover:bg-gray-700 text-white font-bold py-1 my-1 px-4 w rounded text-xs focus:outline-none focus:shadow-outline float-right bg-lime-700"
-            >
-                Submit
-            </button>
+                    handleDeleteLetter={handleDeleteLetter}
+                    letters={letters}
+                    handleLetterClick={handleLetterClick}
+                    handleSubmitGuess={handleSubmitGuess}
+                />
+                <button
+                    onClick={handleDeleteLetter}
+                    className="hover:bg-gray-700 text-white font-bold py-1 my-1 px-4 w rounded text-xs focus:outline-none focus:shadow-outline float-left bg-red-700"
+                >
+                    Delete
+                </button>
+                <button
+                    onClick={handleSubmitGuess}
+                    className="hover:bg-gray-700 text-white font-bold py-1 my-1 px-4 w rounded text-xs focus:outline-none focus:shadow-outline float-right bg-lime-700"
+                >
+                    Submit
+                </button>
             </div>
         </div>
     );
