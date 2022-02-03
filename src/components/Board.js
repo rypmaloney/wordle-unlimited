@@ -17,7 +17,7 @@ function Board(props) {
 
     return (
         <div>
-            <div className="max-w-md px-10 sm:px-16">
+            <div className="max-w-md px-16 ">
                 {guesses.map((guess) => {
                     return (
                         <Guess

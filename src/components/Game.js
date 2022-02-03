@@ -410,15 +410,15 @@ const Game = () => {
     };
 
     useEffect(() => {
-        // localStorage.setItem("letters", JSON.stringify(letters));
-        // localStorage.setItem("stats", JSON.stringify(stats));
-        // localStorage.setItem("guesses", JSON.stringify(guesses));
-        // localStorage.setItem("wordList", JSON.stringify(wordList));
-        // localStorage.setItem("word", JSON.stringify(word));
-        // localStorage.setItem("gameNumber", JSON.stringify(gameNumber));
-        // localStorage.setItem("guessIndex", JSON.stringify(guessIndex));
-        //guesses, wordList, word, gameNumber, guessIndex, stats, letters
-    }, []);
+         localStorage.setItem("letters", JSON.stringify(letters));
+         localStorage.setItem("stats", JSON.stringify(stats));
+         localStorage.setItem("guesses", JSON.stringify(guesses));
+         localStorage.setItem("wordList", JSON.stringify(wordList));
+         localStorage.setItem("word", JSON.stringify(word));
+         localStorage.setItem("gameNumber", JSON.stringify(gameNumber));
+         localStorage.setItem("guessIndex", JSON.stringify(guessIndex));
+        
+    }, [guesses, wordList, word, gameNumber, guessIndex, stats, letters]);
 
     return (
         <div className={darkEnabled}>

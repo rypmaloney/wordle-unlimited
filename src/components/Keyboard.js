@@ -35,7 +35,7 @@ const Keyboard = (props) => {
                     );
                 })}
             </div>
-            <div className="flex justify-center  px-12 md:px-12 flex-row content-center">
+            <div className="flex justify-center  px-12 md:px-14 flex-row content-center">
                 {keyRowThree.map((letter) => {
                     return (
                         <div
