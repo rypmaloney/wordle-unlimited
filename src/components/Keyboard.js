@@ -6,43 +6,43 @@ const Keyboard = (props) => {
     let keyRowThree = letters.slice(19, 27);
 
     return (
-        <div className="py-4 w-full">
-            <div className="flex justify-center  px-4 md:px-2 flex-row content-center ">
+        <div className="py-4 w-full px-1">
+            <div className="flex justify-center px-4 md:px-8 flex-row content-center ">
                 {keyRowOne.map((letter) => {
                     return (
                         <div
                             id={letter.letter}
                             key={letter.id}
                             onClick={handleLetterClick}
-                            className={`cursor-pointer hover:bg-gray-300 rounded text-sm text-center border-2 dark:border-gray-600 h-9 w-8 py-1 mx-auto ${letter.color}`}
+                            className={`cursor-pointer hover:bg-gray-300 rounded text-lg text-center border-2 dark:border-gray-600 h-12 w-10 pt-2 md:h-10 md:w-8 md:pt-1  mx-auto ${letter.color}`}
                         >
                             {letter.letter}
                         </div>
                     );
                 })}
             </div>
-            <div className="flex justify-center  px-8 md:px-4 flex-row content-center">
+            <div className="flex justify-center  px-8 md:px-12 flex-row content-center">
                 {keyRowTwo.map((letter) => {
                     return (
                         <div
                             id={letter.letter}
                             key={letter.id}
                             onClick={handleLetterClick}
-                            className={` cursor-pointer hover:bg-gray-300 rounded text-sm text-center border-2 dark:border-gray-600 h-9 w-8 py-1 mx-auto ${letter.color}`}
+                            className={` cursor-pointer hover:bg-gray-300 rounded text-lg text-center border-2 dark:border-gray-600 w-10 h-12 md:h-10 md:w-8 md:pt-1 mt-1 pt-2 mx-auto ${letter.color}`}
                         >
                             {letter.letter}
                         </div>
                     );
                 })}
             </div>
-            <div className="flex justify-center  px-12 md:px-14 flex-row content-center">
+            <div className="flex justify-center  px-14 md:px-20 flex-row content-center">
                 {keyRowThree.map((letter) => {
                     return (
                         <div
                             id={letter.letter}
                             key={letter.id}
                             onClick={handleLetterClick}
-                            className={`cursor-pointer hover:bg-gray-300 rounded text-sm text-center border-2 dark:border-gray-600 h-9 w-8 py-1 mx-auto ${letter.color}`}
+                            className={`cursor-pointer hover:bg-gray-300 rounded text-lg text-center border-2 dark:border-gray-600  md:h-10 md:w-8 md:pt-1  h-12 w-10 mt-1 pt-2 mx-auto ${letter.color}`}
                         >
                             {letter.letter}
                         </div>

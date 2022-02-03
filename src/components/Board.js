@@ -17,7 +17,8 @@ function Board(props) {
 
     return (
         <div>
-            <div className="max-w-md px-16 ">
+            <div className="max-w-md  ">
+            <div className="px-10 md:px-14 ">
                 {guesses.map((guess) => {
                     return (
                         <Guess
@@ -27,6 +28,7 @@ function Board(props) {
                         />
                     );
                 })}
+                </div>
 
                 <p className="text-sm pt-2 mb-0 ml-10 h-2 text-red-500">
                     {warning}
@@ -57,13 +59,13 @@ function Board(props) {
                 />
                 <button
                     onClick={handleDeleteLetter}
-                    className="hover:bg-gray-700 text-white font-bold py-1 my-1 px-4 w rounded text-xs focus:outline-none focus:shadow-outline float-left bg-red-700"
+                    className="hover:bg-gray-700 text-white py-1 m-1 px-4 rounded text-lg md:text-sm  focus:outline-none focus:shadow-outline float-left bg-red-700"
                 >
                     Delete
                 </button>
                 <button
                     onClick={handleSubmitGuess}
-                    className="hover:bg-gray-700 text-white font-bold py-1 my-1 px-4 w rounded text-xs focus:outline-none focus:shadow-outline float-right bg-lime-700"
+                    className="hover:bg-gray-700 text-white py-1 m-1 px-4 text-lg md:text-sm rounded focus:outline-none focus:shadow-outline float-right bg-lime-700"
                 >
                     Submit
                 </button>
