@@ -4,11 +4,7 @@ const https = require("https");
 
 let rawWords = fs.readFileSync("lists/fiveLetterWords.json");
 let words = JSON.parse(rawWords);
-
-
-let numberOfWords = words.length
 let currentWord = 0
-
 let wordsAndDefs = [];
 
 

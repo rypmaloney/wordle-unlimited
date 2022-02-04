@@ -71,7 +71,7 @@ const generateInitialLettersList = (wordLength) => {
 };
 
 const Game = () => {
-    const [darkEnabled, setDarkEnabled] = useState("light");
+    const [darkEnabled, setDarkEnabled] = useState("dark");
     const [gameNumber, setGameNumber] = useState(() => {
         const saved = localStorage.getItem("gameNumber");
         const initialValue = JSON.parse(saved);
@@ -260,7 +260,7 @@ const Game = () => {
             } else if (checkResult === 1) {
                 updateKey(letterIndex, "bg-yellow-500");
             } else {
-                updateKey(letterIndex, "bg-slate-500");
+                updateKey(letterIndex, "bg-slate-500 ");
             }
         }, 1500);
     };

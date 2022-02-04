@@ -42,7 +42,7 @@ function Board(props) {
                         <input
                             inputMode='none'
                             onChange={handleGuessChange}
-                            className="form-control border border-solid border-slate-600 text-slate-700 dark:bg-slate-700 dark:text-slate-100 text-lg text-center dark:text-slate-50 rounded-ms h-10 w-4/5 mx-auto"
+                            className="form-control border border-solid border-slate-600 text-slate-700 dark:bg-slate-700  text-lg text-center dark:text-slate-50 rounded-ms h-10 w-4/5 mx-auto"
                             type="text"
                             placeholder="type your guess"
                             maxLength={5}
