@@ -31,7 +31,6 @@ const postWords = () =>{
 
 
 const getDefs = (num) => {
-        const key = "ed92f719-9976-426c-a34f-1fb9d6ceb547";
         https
             .get(
                 `https://api.dictionaryapi.dev/api/v2/entries/en/${words[num]}`,
