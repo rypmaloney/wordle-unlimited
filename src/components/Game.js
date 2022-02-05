@@ -205,24 +205,28 @@ const Game = () => {
     const handleGuessChange = (e) => {
         setWarning("");
         setInputValue(e.target.value.toUpperCase());
-        let deepGuessesCopy = cloneDeep(guesses)
+        let deepGuessesCopy = cloneDeep(guesses);
 
         if (deepGuessesCopy[guessIndex].guess.length < 6) {
             //updates the guess
             deepGuessesCopy[guessIndex].guess = e.target.value.toLowerCase();
             setGuesses((prevState) => {
                 const guessObjects = Array.from(prevState);
-                guessObjects[guessIndex].guess =  deepGuessesCopy[guessIndex].guess
+                guessObjects[guessIndex].guess =
+                    deepGuessesCopy[guessIndex].guess;
                 return guessObjects;
             });
             //holds the new split word
-            let newGuessSplit = Array(5)
+            let newGuessSplit = Array(5);
             for (let i = 0; i <= 4; i++) {
-                newGuessSplit[i] = deepGuessesCopy[guessIndex].guess.slice(i, i + 1);
+                newGuessSplit[i] = deepGuessesCopy[guessIndex].guess.slice(
+                    i,
+                    i + 1
+                );
             }
             setGuesses((prevState) => {
                 const guessObjects = Array.from(prevState);
-                guessObjects[guessIndex].guessSplit =  newGuessSplit
+                guessObjects[guessIndex].guessSplit = newGuessSplit;
                 return guessObjects;
             });
         }
@@ -235,7 +239,6 @@ const Game = () => {
         if (newGuess.length === 5) {
             checkWordle(newGuess, guessIndex);
         }
-
     };
 
     const updateKeyboard = (letter, checkResult) => {
@@ -255,12 +258,17 @@ const Game = () => {
         );
         //setTimeout so it doesn't display until after the board updates
         setTimeout(() => {
-            if (checkResult === 0) {
-                updateKey(letterIndex, "bg-lime-500");
-            } else if (checkResult === 1) {
-                updateKey(letterIndex, "bg-yellow-500");
-            } else {
-                updateKey(letterIndex, "bg-slate-500 ");
+            if (
+                lettersCopy[letterIndex].color !==
+                "bg-lime-500"
+            ) {
+                if (checkResult === 0) {
+                    updateKey(letterIndex, "bg-lime-500");
+                } else if (checkResult === 1) {
+                    updateKey(letterIndex, "bg-yellow-500");
+                } else {
+                    updateKey(letterIndex, "bg-slate-500 ");
+                }
             }
         }, 1500);
     };
@@ -372,7 +380,7 @@ const Game = () => {
             tabulateStats(0);
         }
     };
-//rewrite
+    //rewrite
     const handleLetterClick = (e) => {
         if (inputValue.length < 5) {
             setWarning("");
@@ -396,14 +404,15 @@ const Game = () => {
             setWarning("");
             let call = inputValue.slice(0, -1);
             setInputValue(call);
-            let guessesCopy = cloneDeep(guesses)
+            let guessesCopy = cloneDeep(guesses);
             if (guessesCopy[guessIndex].guess.length <= 5) {
                 guessesCopy[guessIndex].guess = call.toLowerCase();
                 for (let i = 0; i < 5; i++) {
                     setGuesses((prevState) => {
                         let guessObjects = Array.from(prevState);
-                        guessObjects[guessIndex].guessSplit[i]= guessesCopy[
-                            guessIndex].guess.slice(i, i + 1)
+                        guessObjects[guessIndex].guessSplit[i] = guessesCopy[
+                            guessIndex
+                        ].guess.slice(i, i + 1);
                         return guessObjects;
                     });
                 }
@@ -412,18 +421,17 @@ const Game = () => {
     };
 
     useEffect(() => {
-         localStorage.setItem("letters", JSON.stringify(letters));
-         localStorage.setItem("stats", JSON.stringify(stats));
-         localStorage.setItem("guesses", JSON.stringify(guesses));
-         localStorage.setItem("wordList", JSON.stringify(wordList));
-         localStorage.setItem("word", JSON.stringify(word));
-         localStorage.setItem("gameNumber", JSON.stringify(gameNumber));
-         localStorage.setItem("guessIndex", JSON.stringify(guessIndex));
-        
+        localStorage.setItem("letters", JSON.stringify(letters));
+        localStorage.setItem("stats", JSON.stringify(stats));
+        localStorage.setItem("guesses", JSON.stringify(guesses));
+        localStorage.setItem("wordList", JSON.stringify(wordList));
+        localStorage.setItem("word", JSON.stringify(word));
+        localStorage.setItem("gameNumber", JSON.stringify(gameNumber));
+        localStorage.setItem("guessIndex", JSON.stringify(guessIndex));
     }, [guesses, wordList, word, gameNumber, guessIndex, stats, letters]);
 
     return (
-        <div className= {`min-h-screen  ${darkEnabled}`}>
+        <div className={`min-h-screen  ${darkEnabled}`}>
             <div className={`bg-gray-50  dark:bg-gray-800 pb-20 min-h-screen `}>
                 <Nav
                     darkEnabled={darkEnabled}
