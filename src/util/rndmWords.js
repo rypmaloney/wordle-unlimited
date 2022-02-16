@@ -39,7 +39,7 @@ var options = {
     url: `https://wordsapiv1.p.rapidapi.com/words/${words[num]}/definitions`,
     headers: {
         "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
-        "x-rapidapi-key": "220d5b54e7mshbfb806407f2aa7fp1432d4jsnc5157c15dc6c",
+        "x-rapidapi-key": "",
     },
 };
 
