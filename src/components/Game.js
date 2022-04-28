@@ -1,16 +1,14 @@
-import { useEffect, useState } from "react";
-import isEqual from "lodash/isEqual";
-import shuffle from "lodash/shuffle";
-import { cloneDeep } from "lodash";
-import uniqid from "uniqid";
-import Modal from "./endModal";
-import Board from "./Board";
-import Nav from "./Nav";
-import StatsModal from "./StatsModal";
+import { useEffect, useState } from 'react';
+import isEqual from 'lodash/isEqual';
+import shuffle from 'lodash/shuffle';
+import { cloneDeep } from 'lodash';
+import uniqid from 'uniqid';
+import Modal from './endModal';
+import Board from './Board';
+import Nav from './Nav';
+import StatsModal from './StatsModal';
 
-const list = require("../util/lists/processedWords.json");
-
-const shuffledList = shuffle(list);
+const initialList = require('../util/lists/initialList.json');
 
 const generateInitialGuessList = (wordLength) => {
     let list = [];
@@ -18,11 +16,11 @@ const generateInitialGuessList = (wordLength) => {
         list.push({
             guessMade: false,
             isWord: true,
-            guess: "",
-            guessSplit: Array(wordLength).fill(""),
-            letterCheck: Array(wordLength).fill(""),
+            guess: '',
+            guessSplit: Array(wordLength).fill(''),
+            letterCheck: Array(wordLength).fill(''),
             letterColor: Array(wordLength).fill(
-                "bg-slate-100 dark:bg-gray-800 "
+                'bg-slate-100 dark:bg-gray-800 '
             ),
             id: uniqid(),
         });
@@ -31,39 +29,39 @@ const generateInitialGuessList = (wordLength) => {
 };
 const generateInitialLettersList = (wordLength) => {
     const keyboardArray = [
-        "Q",
-        "W",
-        "E",
-        "R",
-        "T",
-        "Y",
-        "U",
-        "I",
-        "O",
-        "P",
-        "A",
-        "S",
-        "D",
-        "F",
-        "G",
-        "H",
-        "J",
-        "K",
-        "L",
-        "Z",
-        "X",
-        "C",
-        "V",
-        "B",
-        "N",
-        "M",
+        'Q',
+        'W',
+        'E',
+        'R',
+        'T',
+        'Y',
+        'U',
+        'I',
+        'O',
+        'P',
+        'A',
+        'S',
+        'D',
+        'F',
+        'G',
+        'H',
+        'J',
+        'K',
+        'L',
+        'Z',
+        'X',
+        'C',
+        'V',
+        'B',
+        'N',
+        'M',
     ];
     let list = [];
 
     keyboardArray.forEach((letter) => {
         list.push({
             letter: letter,
-            color: "bg-slate-100",
+            color: 'bg-slate-100',
             id: uniqid(),
         });
     });
@@ -71,21 +69,21 @@ const generateInitialLettersList = (wordLength) => {
 };
 
 const Game = () => {
-    const [darkEnabled, setDarkEnabled] = useState("dark");
+    const [darkEnabled, setDarkEnabled] = useState('dark');
     const [gameNumber, setGameNumber] = useState(() => {
-        const saved = localStorage.getItem("gameNumber");
+        const saved = localStorage.getItem('gameNumber');
         const initialValue = JSON.parse(saved);
         return initialValue || 0;
     });
 
     const [wordList, setWordList] = useState(() => {
-        const saved = localStorage.getItem("wordList");
+        const saved = localStorage.getItem('wordList');
         const initialValue = JSON.parse(saved);
-        return initialValue || shuffledList;
+        return initialValue || initialList;
     });
 
     const [word, setWord] = useState(() => {
-        const saved = localStorage.getItem("word");
+        const saved = localStorage.getItem('word');
         const initialValue = JSON.parse(saved);
         return initialValue || wordList[0];
     });
@@ -94,18 +92,18 @@ const Game = () => {
     // 3 === wrong letter, wrong location
 
     const [guessIndex, setGuessIndex] = useState(() => {
-        const saved = localStorage.getItem("guessIndex");
+        const saved = localStorage.getItem('guessIndex');
         const initialValue = JSON.parse(saved);
         return initialValue || 0;
     });
 
     const [guesses, setGuesses] = useState(() => {
-        const saved = localStorage.getItem("guesses");
+        const saved = localStorage.getItem('guesses');
         const initialValue = JSON.parse(saved);
         return initialValue || generateInitialGuessList(5);
     });
     const [letters, setLetters] = useState(() => {
-        const saved = localStorage.getItem("letters");
+        const saved = localStorage.getItem('letters');
         const initialValue = JSON.parse(saved);
         return initialValue || generateInitialLettersList();
     });
@@ -119,7 +117,7 @@ const Game = () => {
         },
     ]);
     const [stats, setStats] = useState(() => {
-        const saved = localStorage.getItem("stats");
+        const saved = localStorage.getItem('stats');
         const initialValue = JSON.parse(saved);
         return (
             initialValue || {
@@ -135,13 +133,37 @@ const Game = () => {
             }
         );
     });
-    const [gameResult, setGameResult] = useState("lost");
-    const [inputValue, setInputValue] = useState("");
-    const [warning, setWarning] = useState("");
+    const [gameResult, setGameResult] = useState('lost');
+    const [inputValue, setInputValue] = useState('');
+    const [warning, setWarning] = useState('');
 
     //modals
     const [endModalIsOpen, setEndModalIsOpen] = useState(false);
     const [statsModalIsOpen, setStatsModalIsOpen] = useState(false);
+
+    const getList = async () => {
+        try {
+            const res = await fetch(
+                'https://desolate-atoll-29481.herokuapp.com/list/5'
+            );
+            if (res.status !== 200) {
+                console.log(res.status);
+            } else {
+                const list = await res.json();
+                //if we're using the initial list of 4
+                if (wordList.length < 5) {
+                    let shuffled = shuffle(list);
+                    setWordList(shuffled);
+                }
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    useEffect(() => {
+        getList();
+    }, []);
 
     const newGame = () => {
         let newGameNum = gameNumber + 1;
@@ -194,7 +216,7 @@ const Game = () => {
                     break;
 
                 default:
-                    console.log("stats is broken");
+                    console.log('stats is broken');
             }
         } else {
             statsCopy.loss += 1;
@@ -203,7 +225,7 @@ const Game = () => {
     };
 
     const handleGuessChange = (e) => {
-        setWarning("");
+        setWarning('');
         setInputValue(e.target.value.toUpperCase());
         let deepGuessesCopy = cloneDeep(guesses);
 
@@ -258,32 +280,29 @@ const Game = () => {
         );
         //setTimeout so it doesn't display until after the board updates
         setTimeout(() => {
-            if (
-                lettersCopy[letterIndex].color !==
-                "bg-lime-500"
-            ) {
+            if (lettersCopy[letterIndex].color !== 'bg-lime-500') {
                 if (checkResult === 0) {
-                    updateKey(letterIndex, "bg-lime-500");
+                    updateKey(letterIndex, 'bg-lime-500');
                 } else if (checkResult === 1) {
-                    updateKey(letterIndex, "bg-yellow-500");
+                    updateKey(letterIndex, 'bg-yellow-500');
                 } else {
-                    updateKey(letterIndex, "bg-slate-500 ");
+                    updateKey(letterIndex, 'bg-slate-500 ');
                 }
             }
         }, 1500);
     };
 
     const checkLetters = (guess, index) => {
-        const guessSplit = guess.split("");
-        const wordSplit = word.word.split("");
+        const guessSplit = guess.split('');
+        const wordSplit = word.word.split('');
         //measure guess against this. Remove greens so you don't get duplicate yellow/green combinations
         let wordTracker = cloneDeep(wordSplit);
         //push colors for board to this. Does not mutate state directly
-        let guessColor = ["", "", "", "", ""];
+        let guessColor = ['', '', '', '', ''];
         //check for green
         for (let i = 0; i < 5; i++) {
             if (guessSplit[i] === wordSplit[i]) {
-                guessColor[i] = "bg-lime-500 dark:bg-lime-500";
+                guessColor[i] = 'bg-lime-500 dark:bg-lime-500';
                 updateKeyboard(guessSplit[i], 0);
                 wordTracker[i] = 0;
             }
@@ -294,14 +313,14 @@ const Game = () => {
                     guessSplit[i] === wordTracker[j] &&
                     guessSplit[i] !== wordSplit[i]
                 ) {
-                    guessColor[i] = "bg-yellow-500 dark:bg-yellow-500";
+                    guessColor[i] = 'bg-yellow-500 dark:bg-yellow-500';
                     updateKeyboard(guessSplit[i], 1);
                 } else if (
                     guessSplit[i] !== wordTracker[i] &&
                     guessSplit[i] !== wordTracker[j] &&
-                    guessColor[i] === ""
+                    guessColor[i] === ''
                 ) {
-                    guessColor[i] = "bg-slate-500";
+                    guessColor[i] = 'bg-slate-500';
                     updateKeyboard(guessSplit[i], 3);
                 }
             }
@@ -320,14 +339,11 @@ const Game = () => {
 
     async function checkWordle(guess, index) {
         const res = await fetch(
-            `https://wordsapiv1.p.rapidapi.com/words/${guess}/definitions`,
+            `https://desolate-atoll-29481.herokuapp.com/words/${guess}/`,
             {
-                method: "get",
+                method: 'get',
                 headers: {
-                    Accept: "application/json",
-                    "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
-                    "x-rapidapi-key":
-                        "220d5b54e7mshbfb806407f2aa7fp1432d4jsnc5157c15dc6c",
+                    Accept: 'application/json',
                 },
             }
         );
@@ -335,7 +351,8 @@ const Game = () => {
         const response = await res.json();
 
         //Update either input or warning depending on if it is a word
-        if (response.success !== false) {
+        if (!response.message) {
+            //is a word
             setGuesses((prevState) => {
                 let guessObjects = Array.from(prevState);
                 guessObjects[index].isWord = true;
@@ -346,11 +363,11 @@ const Game = () => {
                 let nextGuessIndex = guessIndex + 1;
                 setGuessIndex(nextGuessIndex);
             }
-            setInputValue("");
-            // setWarning(response[0].shortdef[0]);
+            setInputValue('');
             checkLetters(guess, index);
             checkIfWon();
         } else {
+            //is not a word
             setGuesses((prevState) => {
                 let guessObjects = Array.from(prevState);
                 guessObjects[index].isWord = false;
@@ -363,27 +380,27 @@ const Game = () => {
     const checkIfWon = () => {
         let submittedGuess = guesses[guessIndex].guessSplit;
 
-        if (isEqual(submittedGuess, word.word.split(""))) {
+        if (isEqual(submittedGuess, word.word.split(''))) {
             setTimeout(() => {
                 setEndModalIsOpen(true);
             }, 1500);
-            setGameResult("won");
+            setGameResult('won');
             tabulateStats(1);
         } else if (
-            !isEqual(submittedGuess, word.word.split("")) &&
+            !isEqual(submittedGuess, word.word.split('')) &&
             guessIndex === 5
         ) {
             setTimeout(() => {
                 setEndModalIsOpen(true);
             }, 1500);
-            setGameResult("lost");
+            setGameResult('lost');
             tabulateStats(0);
         }
     };
     //rewrite
     const handleLetterClick = (e) => {
         if (inputValue.length < 5) {
-            setWarning("");
+            setWarning('');
             let call = inputValue + e.target.id;
             setInputValue(call);
             let guessesCopy = guesses.slice();
@@ -401,7 +418,7 @@ const Game = () => {
 
     const handleDeleteLetter = () => {
         if (inputValue.length > 0) {
-            setWarning("");
+            setWarning('');
             let call = inputValue.slice(0, -1);
             setInputValue(call);
             let guessesCopy = cloneDeep(guesses);
@@ -421,13 +438,13 @@ const Game = () => {
     };
 
     useEffect(() => {
-        localStorage.setItem("letters", JSON.stringify(letters));
-        localStorage.setItem("stats", JSON.stringify(stats));
-        localStorage.setItem("guesses", JSON.stringify(guesses));
-        localStorage.setItem("wordList", JSON.stringify(wordList));
-        localStorage.setItem("word", JSON.stringify(word));
-        localStorage.setItem("gameNumber", JSON.stringify(gameNumber));
-        localStorage.setItem("guessIndex", JSON.stringify(guessIndex));
+        localStorage.setItem('letters', JSON.stringify(letters));
+        localStorage.setItem('stats', JSON.stringify(stats));
+        localStorage.setItem('guesses', JSON.stringify(guesses));
+        localStorage.setItem('wordList', JSON.stringify(wordList));
+        localStorage.setItem('word', JSON.stringify(word));
+        localStorage.setItem('gameNumber', JSON.stringify(gameNumber));
+        localStorage.setItem('guessIndex', JSON.stringify(guessIndex));
     }, [guesses, wordList, word, gameNumber, guessIndex, stats, letters]);
 
     return (
@@ -440,11 +457,11 @@ const Game = () => {
                     setStatsModalIsOpen={setStatsModalIsOpen}
                 />
 
-                <div className="max-w-md min-w-md mx-auto flex flex-col justify-center min-h-screen">
-                    <h1 className="text-3xl font-bold text-slate-600 dark:text-slate-200 text-center mx-auto p-3">
-                        W<span className="text-yellow-500">o</span>rd
-                        <span className="text-lime-500">l</span>e Unli
-                        <span className="text-yellow-500">m</span>ited
+                <div className='max-w-md min-w-md mx-auto flex flex-col justify-center min-h-screen'>
+                    <h1 className='text-3xl font-bold text-slate-600 dark:text-slate-200 text-center mx-auto p-3'>
+                        W<span className='text-yellow-500'>o</span>rd
+                        <span className='text-lime-500'>l</span>e Unli
+                        <span className='text-yellow-500'>m</span>ited
                     </h1>
 
                     <Board

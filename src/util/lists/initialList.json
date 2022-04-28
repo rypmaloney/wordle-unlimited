@@ -1,0 +1,38 @@
+[
+    {
+        "word": "ackee",
+        "definitions": [
+            {
+                "definition": "red pear-shaped tropical fruit with poisonous seeds; flesh is poisonous when unripe or overripe",
+                "partOfSpeech": "noun"
+            }
+        ]
+    },
+    {
+        "word": "acned",
+        "definitions": [
+            {
+                "definition": "(of complexion) blemished by imperfections of the skin",
+                "partOfSpeech": "adjective"
+            }
+        ]
+    },
+    {
+        "word": "acold",
+        "definitions": [
+            {
+                "definition": "of persons; feeling cold",
+                "partOfSpeech": "adjective"
+            }
+        ]
+    },
+    {
+        "word": "acorn",
+        "definitions": [
+            {
+                "definition": "fruit of the oak tree: a smooth thin-walled nut in a woody cup-shaped base",
+                "partOfSpeech": "noun"
+            }
+        ]
+    }
+]
