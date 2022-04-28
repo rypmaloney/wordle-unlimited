@@ -163,7 +163,7 @@ const Game = () => {
 
     useEffect(() => {
         getList();
-    }, []);
+    }, [word]);
 
     const newGame = () => {
         let newGameNum = gameNumber + 1;
