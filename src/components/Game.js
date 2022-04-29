@@ -154,7 +154,7 @@ const Game = () => {
             } else {
                 const list = await res.json();
                 //if we're using the initial list of 4
-                if (wordList.length < 5) {
+                if (wordList.length < 100) {
                     let shuffled = shuffle(list);
                     setWordList(shuffled);
                 }
@@ -167,7 +167,7 @@ const Game = () => {
     useEffect(() => {
         getList();
     }, [word]);
-
+    //Post function to track games played
     const sendGameInfo = async () => {
         console.log({
             guess_one: guesses[0].guess,
