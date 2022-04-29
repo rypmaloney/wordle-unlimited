@@ -391,7 +391,7 @@ const Game = () => {
             `https://desolate-atoll-29481.herokuapp.com/words/${guess}/`,
             //`http://localhost:3080/words/${guess}/`
             {
-                method: 'get',
+                method: 'POST',
                 body: JSON.stringify({
                     game_word: word.word,
                     guess_number: guessIndex,
