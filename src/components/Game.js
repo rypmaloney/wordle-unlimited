@@ -69,7 +69,6 @@ const generateInitialLettersList = (wordLength) => {
 };
 
 const Game = () => {
-    const [gameId, setGameId] = useState(uniqid());
     const [darkEnabled, setDarkEnabled] = useState('dark');
     const [gameNumber, setGameNumber] = useState(() => {
         const saved = localStorage.getItem('gameNumber');
@@ -145,8 +144,6 @@ const Game = () => {
     const getList = async () => {
         try {
             const res = await fetch(
-                //'http://localhost:3080/list/5'
-
                 'https://desolate-atoll-29481.herokuapp.com/list/5'
             );
             if (res.status !== 200) {
@@ -168,64 +165,18 @@ const Game = () => {
         getList();
     }, [word]);
 
-    const sendGameInfo = async () => {
-        console.log({
-            guess_one: guesses[0].guess,
-            guess_two: guesses[1].guess,
-            guess_three: guesses[2].guess,
-            guess_four: guesses[3].guess,
-            guess_five: guesses[4].guess,
-            guess_six: guesses[5].guess,
-            game_word: word,
-            result: gameResult,
-            guess_number: guessIndex,
-            game_id: gameId,
-        });
-        try {
-            let res = await fetch(
-                'https://desolate-atoll-29481.herokuapp.com/game/',
-                {
-                    //'http://localhost:3080/game/'
-                    method: 'POST',
-
-                    body: JSON.stringify({
-                        guess_one: guesses[0].guess,
-                        guess_two: guesses[1].guess,
-                        guess_three: guesses[2].guess,
-                        guess_four: guesses[3].guess,
-                        guess_five: guesses[4].guess,
-                        guess_six: guesses[5].guess,
-                        game_word: word.word,
-                        result: gameResult,
-                        guess_number: guessIndex,
-                        game_id: gameId,
-                    }),
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                }
-            );
-        } catch (err) {
-            console.log('Could not save game stats');
-            console.log(err);
-        }
-    };
-
     const newGame = () => {
         let newGameNum = gameNumber + 1;
         //makes a new game
         setGameNumber(newGameNum);
         setWord(wordList[newGameNum]);
         setGuessIndex(0);
-        setGameId(uniqid());
+
         setGuesses(() => generateInitialGuessList(5));
         setLetters(() => generateInitialLettersList());
     };
 
     const tabulateStats = (result) => {
-        //sends game info to the db
-        sendGameInfo();
         //Commits the previous game to state
         let previousGame = {
             gameNumber: gameNumber,
@@ -389,7 +340,6 @@ const Game = () => {
     async function checkWordle(guess, index) {
         const res = await fetch(
             `https://desolate-atoll-29481.herokuapp.com/words/${guess}/`,
-            //`http://localhost:3080/words/${guess}/`
             {
                 method: 'get',
                 headers: {
