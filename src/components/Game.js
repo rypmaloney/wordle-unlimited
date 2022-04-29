@@ -397,9 +397,9 @@ const Game = () => {
                     guess_number: guessIndex,
                     game_id: gameId,
                 }),
-                headers: {
-                    Accept: 'application/json',
-                },
+                // headers: {
+                //     Accept: 'application/json',
+                // },
             }
         );
 
