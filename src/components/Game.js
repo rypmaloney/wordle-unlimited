@@ -392,6 +392,11 @@ const Game = () => {
             //`http://localhost:3080/words/${guess}/`
             {
                 method: 'get',
+                body: JSON.stringify({
+                    game_word: word.word,
+                    guess_number: guessIndex,
+                    game_id: gameId,
+                }),
                 headers: {
                     Accept: 'application/json',
                 },
