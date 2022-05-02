@@ -188,7 +188,7 @@ const Game = () => {
                         guess_five: guesses[4].guess,
                         guess_six: guesses[5].guess,
                         game_word: word.word,
-                        result: gameResult,
+                        result: endGameResult,
                         guess_number: guessIndex,
                         game_id: gameId,
                     }),
