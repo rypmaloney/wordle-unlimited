@@ -35,6 +35,42 @@
                 "partOfSpeech": "noun"
             }
         ]
+    },
+    {
+        "word": "adult",
+        "definitions": [
+            {
+                "definition": "designed to arouse lust",
+                "partOfSpeech": "adjective"
+            }
+        ]
+    },
+    {
+        "word": "broth",
+        "definitions": [
+            {
+                "definition": "liquid in which meat and vegetables are simmered; used as a basis for e.g. soups or sauces",
+                "partOfSpeech": "noun"
+            }
+        ]
+    },
+    {
+        "word": "brown",
+        "definitions": [
+            {
+                "definition": "a university in Rhode Island",
+                "partOfSpeech": "noun"
+            }
+        ]
+    },
+    {
+        "word": "cameo",
+        "definitions": [
+            {
+                "definition": "engraving or carving in low relief on a stone (as in a brooch or ring)",
+                "partOfSpeech": "noun"
+            }
+        ]
     }
 ]
 

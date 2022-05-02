@@ -80,7 +80,7 @@ const Game = () => {
     const [wordList, setWordList] = useState(() => {
         const saved = localStorage.getItem('wordList');
         const initialValue = JSON.parse(saved);
-        return initialValue || initialList;
+        return initialValue || shuffle(initialList);
     });
 
     const [word, setWord] = useState(() => {
@@ -168,19 +168,11 @@ const Game = () => {
         getList();
     }, [word]);
     //Post function to track games played
-    const sendGameInfo = async () => {
-        console.log({
-            guess_one: guesses[0].guess,
-            guess_two: guesses[1].guess,
-            guess_three: guesses[2].guess,
-            guess_four: guesses[3].guess,
-            guess_five: guesses[4].guess,
-            guess_six: guesses[5].guess,
-            game_word: word,
-            result: gameResult,
-            guess_number: guessIndex,
-            game_id: gameId,
-        });
+    const sendGameInfo = async (result) => {
+        let endGameResult = 'loss';
+        if (result === 1) {
+            endGameResult = 'won';
+        }
         try {
             let res = await fetch(
                 'https://desolate-atoll-29481.herokuapp.com/game/',
@@ -225,7 +217,7 @@ const Game = () => {
 
     const tabulateStats = (result) => {
         //sends game info to the db
-        sendGameInfo();
+        sendGameInfo(result);
         //Commits the previous game to state
         let previousGame = {
             gameNumber: gameNumber,
